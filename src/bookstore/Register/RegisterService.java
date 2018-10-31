@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bookstore;
+package bookstore.Register;
 
 /**
  *
  * @author KIATS
  */
-public class User {
+public class RegisterService {
     
 }

@@ -5,6 +5,11 @@
  */
 package bookstore;
 
+import bookstore.Database.User;
+import bookstore.Register.Register;
+import bookstore.Login.LoginService;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dell
@@ -57,13 +62,20 @@ public class Main extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        passText = new javax.swing.JLabel();
+        userText = new javax.swing.JLabel();
+        userField = new javax.swing.JTextField();
+        passField = new javax.swing.JTextField();
+        statusText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
@@ -147,53 +159,53 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setBounds(1050, 0, 50, 30);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 130, 1220, 30);
+        jPanel1.setBounds(0, 110, 1220, 30);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(953, 225, 170, 170);
+        jLabel11.setBounds(950, 200, 170, 170);
 
         jLabel13.setText("jLabel13");
         getContentPane().add(jLabel13);
-        jLabel13.setBounds(923, 405, 230, 180);
+        jLabel13.setBounds(920, 380, 230, 180);
 
         jLabel12.setText("la");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(923, 605, 220, 70);
+        jLabel12.setBounds(920, 580, 220, 70);
 
         P8.setBackground(new java.awt.Color(0, 0, 0));
         P8.setForeground(new java.awt.Color(0, 0, 0));
         P8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P8);
-        P8.setBounds(703, 535, 120, 160);
+        P8.setBounds(690, 450, 120, 160);
 
         P7.setBackground(new java.awt.Color(0, 0, 0));
         P7.setForeground(new java.awt.Color(0, 0, 0));
         P7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P7);
-        P7.setBounds(493, 535, 120, 160);
+        P7.setBounds(480, 450, 120, 160);
 
         P6.setBackground(new java.awt.Color(0, 0, 0));
         P6.setForeground(new java.awt.Color(0, 0, 0));
         P6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P6);
-        P6.setBounds(283, 535, 120, 160);
+        P6.setBounds(270, 450, 120, 160);
 
         P5.setBackground(new java.awt.Color(0, 0, 0));
         P5.setForeground(new java.awt.Color(0, 0, 0));
         P5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P5);
-        P5.setBounds(73, 535, 120, 160);
+        P5.setBounds(60, 450, 120, 160);
 
         jLabel7.setFont(new java.awt.Font("Cloud Light", 1, 18)); // NOI18N
         jLabel7.setText("หนังสือแนะนำ");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(43, 495, 230, 30);
+        jLabel7.setBounds(30, 410, 230, 30);
 
         Banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Banner.setText("โฆษณา");
         getContentPane().add(Banner);
-        Banner.setBounds(73, 205, 790, 290);
+        Banner.setBounds(60, 160, 710, 240);
 
         ABook.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ABook.setForeground(new java.awt.Color(255, 0, 0));
@@ -211,78 +223,95 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ABook);
-        ABook.setBounds(683, 505, 200, 20);
+        ABook.setBounds(670, 420, 200, 20);
 
         N8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N8.setText("ไม่พบข้อมูล");
         getContentPane().add(N8);
-        N8.setBounds(703, 715, 170, 19);
+        N8.setBounds(690, 630, 170, 19);
 
         M8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M8.setText("ไม่พบข้อมูล");
         getContentPane().add(M8);
-        M8.setBounds(703, 745, 120, 19);
+        M8.setBounds(690, 660, 120, 19);
 
         M7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M7.setText("ไม่พบข้อมูล");
         getContentPane().add(M7);
-        M7.setBounds(493, 745, 120, 19);
+        M7.setBounds(480, 660, 120, 19);
 
         N7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N7.setText("ไม่พบข้อมูล");
         getContentPane().add(N7);
-        N7.setBounds(493, 715, 170, 19);
+        N7.setBounds(480, 630, 170, 19);
 
         N6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N6.setText("ไม่พบข้อมูล");
         getContentPane().add(N6);
-        N6.setBounds(283, 715, 170, 19);
+        N6.setBounds(270, 630, 170, 19);
 
         M6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M6.setText("ไม่พบข้อมูล");
         getContentPane().add(M6);
-        M6.setBounds(283, 745, 120, 19);
+        M6.setBounds(270, 660, 120, 19);
 
         M5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M5.setText("ไม่พบข้อมูล");
         getContentPane().add(M5);
-        M5.setBounds(73, 745, 120, 19);
+        M5.setBounds(60, 660, 120, 19);
 
         N5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N5.setText("ไม่พบข้อมูล");
         getContentPane().add(N5);
-        N5.setBounds(73, 715, 170, 19);
+        N5.setBounds(60, 630, 170, 19);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel2);
         jLabel2.setBounds(1130, 16, 70, 20);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Register");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel4);
         jLabel4.setBounds(1130, 46, 70, 20);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Logout");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         getContentPane().add(jLabel5);
         jLabel5.setBounds(1130, 76, 70, 20);
 
-        jLabel6.setText("Password");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(920, 60, 58, 44);
+        passText.setText("Password");
+        getContentPane().add(passText);
+        passText.setBounds(920, 50, 58, 44);
 
-        jLabel8.setText("Username");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(920, 10, 59, 44);
+        userText.setText("Username");
+        getContentPane().add(userText);
+        userText.setBounds(920, 20, 59, 44);
+        getContentPane().add(userField);
+        userField.setBounds(990, 30, 126, 24);
+        getContentPane().add(passField);
+        passField.setBounds(990, 60, 126, 24);
 
-        jTextField1.setText("jTextField1");
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(990, 20, 126, 24);
-
-        jTextField2.setText("jTextField1");
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(990, 70, 126, 24);
+        statusText.setBackground(new java.awt.Color(255, 255, 255));
+        statusText.setForeground(new java.awt.Color(0, 0, 0));
+        statusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(statusText);
+        statusText.setBounds(900, 10, 240, 90);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -315,6 +344,34 @@ public class Main extends javax.swing.JFrame {
     private void ABookMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseExited
         ABook.setText("ดูรายการสินค้าเพิ่มเติม >>");
     }//GEN-LAST:event_ABookMouseExited
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+      String check = " ";
+      check = LoginService.checkUser(userField.getText(),passField.getText());
+      if (check.equals("admin") || check.equals("user")){
+          System.out.println(check);
+          setUser(check);
+      }else{
+          System.out.println("none");
+      }
+      JOptionPane.showMessageDialog(null,check);
+          
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setSize(1200, 700);
+        this.setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        Register register = new Register();
+        register.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -377,14 +434,28 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField passField;
+    private javax.swing.JLabel passText;
+    private javax.swing.JLabel statusText;
+    private javax.swing.JTextField userField;
+    private javax.swing.JLabel userText;
     // End of variables declaration//GEN-END:variables
+
+    
+    void setUser(String check){
+        User.setUser(userField.getText(),passField.getText(),check);
+        statusText.setText(check);
+        statusText.setVisible(true);
+        userText.setVisible(false);
+        userField.setVisible(false);
+        passText.setVisible(false);
+        passField.setVisible(false);
+        
+    }
+
 }
