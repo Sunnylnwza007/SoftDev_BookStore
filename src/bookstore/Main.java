@@ -8,6 +8,7 @@ package bookstore;
 import bookstore.Database.User;
 import bookstore.Register.Register;
 import bookstore.Login.LoginService;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author dell
  */
 public class Main extends javax.swing.JFrame {
-
+    static int timesec = 0;
     /**
      * Creates new form Main
      */
@@ -42,8 +43,6 @@ public class Main extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         P8 = new javax.swing.JLabel();
         P7 = new javax.swing.JLabel();
         P6 = new javax.swing.JLabel();
@@ -67,6 +66,10 @@ public class Main extends javax.swing.JFrame {
         userField = new javax.swing.JTextField();
         passField = new javax.swing.JTextField();
         statusText = new javax.swing.JLabel();
+        Banner1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
@@ -109,7 +112,6 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(SearchBox);
         SearchBox.setBounds(90, 0, 120, 30);
 
-        SearchField.setBackground(new java.awt.Color(255, 255, 255));
         SearchField.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
         SearchField.setForeground(new java.awt.Color(153, 153, 153));
         SearchField.setText("-พิมพ์เพื่อค้นหา-");
@@ -122,7 +124,6 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(SearchField);
         SearchField.setBounds(310, 0, 560, 30);
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
         jTextField3.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(153, 153, 153));
         jTextField3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -142,7 +143,6 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(SearchBut);
         SearchBut.setBounds(910, 0, 110, 30);
 
-        jTextField5.setBackground(new java.awt.Color(255, 255, 255));
         jTextField5.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
         jTextField5.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jTextField5.setEnabled(false);
@@ -162,37 +162,26 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setBounds(0, 110, 1220, 30);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Pro1.PNG"))); // NOI18N
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(950, 200, 170, 170);
-
-        jLabel13.setText("jLabel13");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(920, 380, 230, 180);
-
-        jLabel12.setText("la");
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(920, 580, 220, 70);
+        jLabel11.setBounds(970, 350, 210, 220);
 
         P8.setBackground(new java.awt.Color(0, 0, 0));
-        P8.setForeground(new java.awt.Color(0, 0, 0));
         P8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P8);
         P8.setBounds(690, 450, 120, 160);
 
         P7.setBackground(new java.awt.Color(0, 0, 0));
-        P7.setForeground(new java.awt.Color(0, 0, 0));
         P7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P7);
         P7.setBounds(480, 450, 120, 160);
 
         P6.setBackground(new java.awt.Color(0, 0, 0));
-        P6.setForeground(new java.awt.Color(0, 0, 0));
         P6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P6);
         P6.setBounds(270, 450, 120, 160);
 
         P5.setBackground(new java.awt.Color(0, 0, 0));
-        P5.setForeground(new java.awt.Color(0, 0, 0));
         P5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P5);
         P5.setBounds(60, 450, 120, 160);
@@ -200,12 +189,12 @@ public class Main extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Cloud Light", 1, 18)); // NOI18N
         jLabel7.setText("หนังสือแนะนำ");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(30, 410, 230, 30);
+        jLabel7.setBounds(20, 420, 230, 30);
 
         Banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Banner.setText("โฆษณา");
+        Banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/NewBook.jpg"))); // NOI18N
         getContentPane().add(Banner);
-        Banner.setBounds(60, 160, 710, 240);
+        Banner.setBounds(150, 150, 790, 270);
 
         ABook.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ABook.setForeground(new java.awt.Color(255, 0, 0));
@@ -223,47 +212,47 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ABook);
-        ABook.setBounds(670, 420, 200, 20);
+        ABook.setBounds(740, 420, 200, 20);
 
         N8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N8.setText("ไม่พบข้อมูล");
         getContentPane().add(N8);
-        N8.setBounds(690, 630, 170, 19);
+        N8.setBounds(690, 640, 170, 19);
 
         M8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M8.setText("ไม่พบข้อมูล");
         getContentPane().add(M8);
-        M8.setBounds(690, 660, 120, 19);
+        M8.setBounds(690, 670, 120, 19);
 
         M7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M7.setText("ไม่พบข้อมูล");
         getContentPane().add(M7);
-        M7.setBounds(480, 660, 120, 19);
+        M7.setBounds(480, 670, 120, 19);
 
         N7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N7.setText("ไม่พบข้อมูล");
         getContentPane().add(N7);
-        N7.setBounds(480, 630, 170, 19);
+        N7.setBounds(480, 640, 170, 19);
 
         N6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N6.setText("ไม่พบข้อมูล");
         getContentPane().add(N6);
-        N6.setBounds(270, 630, 170, 19);
+        N6.setBounds(270, 640, 170, 19);
 
         M6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M6.setText("ไม่พบข้อมูล");
         getContentPane().add(M6);
-        M6.setBounds(270, 660, 120, 19);
+        M6.setBounds(270, 670, 120, 19);
 
         M5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         M5.setText("ไม่พบข้อมูล");
         getContentPane().add(M5);
-        M5.setBounds(60, 660, 120, 19);
+        M5.setBounds(60, 670, 120, 19);
 
         N5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N5.setText("ไม่พบข้อมูล");
         getContentPane().add(N5);
-        N5.setBounds(60, 630, 170, 19);
+        N5.setBounds(60, 640, 170, 19);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Login");
@@ -297,21 +286,38 @@ public class Main extends javax.swing.JFrame {
 
         passText.setText("Password");
         getContentPane().add(passText);
-        passText.setBounds(920, 50, 58, 44);
+        passText.setBounds(920, 50, 46, 44);
 
         userText.setText("Username");
         getContentPane().add(userText);
-        userText.setBounds(920, 20, 59, 44);
+        userText.setBounds(920, 20, 48, 44);
         getContentPane().add(userField);
-        userField.setBounds(990, 30, 126, 24);
+        userField.setBounds(990, 30, 126, 20);
         getContentPane().add(passField);
-        passField.setBounds(990, 60, 126, 24);
+        passField.setBounds(990, 60, 126, 20);
 
         statusText.setBackground(new java.awt.Color(255, 255, 255));
-        statusText.setForeground(new java.awt.Color(0, 0, 0));
         statusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(statusText);
         statusText.setBounds(900, 10, 240, 90);
+        getContentPane().add(Banner1);
+        Banner1.setBounds(70, 110, 790, 290);
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Deal 20-80.png"))); // NOI18N
+        getContentPane().add(jLabel13);
+        jLabel13.setBounds(990, 190, 170, 170);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Freetran.png"))); // NOI18N
+        getContentPane().add(jLabel14);
+        jLabel14.setBounds(960, 570, 220, 70);
+
+        jLabel10.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("ติดต่อสอบถาม 0 2826 8753 4");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(1010, 640, 160, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -361,6 +367,7 @@ public class Main extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        Timee();
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -411,6 +418,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ABook;
     private static javax.swing.JLabel Banner;
+    private static javax.swing.JLabel Banner1;
     private javax.swing.JLabel M5;
     private javax.swing.JLabel M6;
     private javax.swing.JLabel M7;
@@ -427,9 +435,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton SearchBut;
     private javax.swing.JTextField SearchField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -457,5 +466,32 @@ public class Main extends javax.swing.JFrame {
         passField.setVisible(false);
         
     }
+    private static void Timee(){
+    java.util.Timer myTimer;
+		myTimer = new java.util.Timer();
+
+		myTimer.schedule(new TimerTask() {
+			public void run() {
+				 timerTick();
+			}
+		}, 0, 6000);
+
+} 
+    
+    private static void timerTick() {
+		timesec++;
+                if (timesec == 3){
+                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
+                }else if (timesec == 2){
+                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban2.jpg"));
+                }else{
+                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\NewBook.jpg"));
+                }
+                
+                if(timesec == 3){
+                    timesec = 0;
+                }
+                System.out.println(timesec);
+	}
 
 }
