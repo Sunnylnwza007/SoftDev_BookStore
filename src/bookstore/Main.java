@@ -167,21 +167,25 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setBounds(970, 350, 210, 220);
 
         P8.setBackground(new java.awt.Color(0, 0, 0));
+        P8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/5.jpg"))); // NOI18N
         P8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P8);
         P8.setBounds(690, 450, 120, 160);
 
         P7.setBackground(new java.awt.Color(0, 0, 0));
+        P7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/9.jpg"))); // NOI18N
         P7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P7);
         P7.setBounds(480, 450, 120, 160);
 
         P6.setBackground(new java.awt.Color(0, 0, 0));
+        P6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/3.jpg"))); // NOI18N
         P6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P6);
         P6.setBounds(270, 450, 120, 160);
 
         P5.setBackground(new java.awt.Color(0, 0, 0));
+        P5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/12.jpg"))); // NOI18N
         P5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P5);
         P5.setBounds(60, 450, 120, 160);
