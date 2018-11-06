@@ -5,18 +5,27 @@
  */
 package bookstore;
 
+import bookstore.Book.BookService;
 import bookstore.Database.User;
 import bookstore.Register.Register;
 import bookstore.Login.LoginService;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
+import bookstore.Database.DatabaseConnect;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author dell
  */
 public class Main extends javax.swing.JFrame {
+
     static int timesec = 0;
+
     /**
      * Creates new form Main
      */
@@ -335,16 +344,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchFieldMouseClicked
 
     private void SearchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButActionPerformed
-       
+
     }//GEN-LAST:event_SearchButActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
 
-        
+
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void ABookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseClicked
-        
+
     }//GEN-LAST:event_ABookMouseClicked
 
     private void ABookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseEntered
@@ -356,22 +365,23 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_ABookMouseExited
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-      String check = " ";
-      check = LoginService.checkUser(userField.getText(),passField.getText());
-      if (check.equals("admin") || check.equals("user")){
-          System.out.println(check);
-          setUser(check);
-      }else{
-          System.out.println("none");
-      }
-      JOptionPane.showMessageDialog(null,check);
-          
+        String check = " ";
+        check = LoginService.checkUser(userField.getText(), passField.getText());
+        if (check.equals("admin") || check.equals("user")) {
+            System.out.println(check);
+            setUser(check);
+        } else {
+            System.out.println("none");
+        }
+        JOptionPane.showMessageDialog(null, check);
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
         Timee();
+        showBook();
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -459,43 +469,127 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel userText;
     // End of variables declaration//GEN-END:variables
 
-    
-    void setUser(String check){
-        User.setUser(userField.getText(),passField.getText(),check);
+    void setUser(String check) {
+        User.setUser(userField.getText(), passField.getText(), check);
         statusText.setText(check);
         statusText.setVisible(true);
         userText.setVisible(false);
         userField.setVisible(false);
         passText.setVisible(false);
         passField.setVisible(false);
-        
+
     }
-    private static void Timee(){
-    java.util.Timer myTimer;
-		myTimer = new java.util.Timer();
 
-		myTimer.schedule(new TimerTask() {
-			public void run() {
-				 timerTick();
-			}
-		}, 0, 6000);
+    void Timee() {
+        java.util.Timer myTimer;
+        myTimer = new java.util.Timer();
 
-} 
-    
-    private static void timerTick() {
-		timesec++;
-                if (timesec == 3){
-                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
-                }else if (timesec == 2){
-                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban2.jpg"));
-                }else{
-                    Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\NewBook.jpg"));
+        myTimer.schedule(new TimerTask() {
+            public void run() {
+                timerTick();
+            }
+        }, 0, 6000);
+
+    }
+
+    void timerTick() {
+        timesec++;
+        if (timesec == 3) {
+            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
+        } else if (timesec == 2) {
+            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban2.jpg"));
+        } else {
+            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\NewBook.jpg"));
+        }
+
+        if (timesec == 3) {
+            timesec = 0;
+        }
+        System.out.println(timesec);
+    }
+
+    void showBook() {
+        int i = 1;
+        int round = 1;
+        while (true) {
+            if (round > 4) {
+                break;
+            }
+
+            if (BookService.getBookList(i) != null) {
+                Set set = DatabaseConnect.getBookList(i).entrySet();
+                Iterator iterator = set.iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry mentry = (Map.Entry) iterator.next();
+
+                    if (round == 1) {
+                        if (mentry.getKey().equals("id")) {
+                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
+                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                            P5.setIcon(new javax.swing.ImageIcon(scaleImage));
+                        }
+
+                        if (mentry.getKey().equals("name")) {
+                            N5.setText("ชื่อ: " + mentry.getValue());
+                        }
+                        if (mentry.getKey().equals("price")) {
+                            M5.setText("ราคา: " + mentry.getValue());
+                        }
+
+                    }
+
+                    if (round == 2) {
+                        if (mentry.getKey().equals("id")) {
+                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
+                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                            P6.setIcon(new javax.swing.ImageIcon(scaleImage));
+                        }
+                        if (mentry.getKey().equals("name")) {
+                            N6.setText("ชื่อ: " + mentry.getValue());
+                        }
+                        if (mentry.getKey().equals("price")) {
+                            M6.setText("ราคา: " + mentry.getValue());
+                        }
+
+                    }
+
+                    if (round == 3) {
+                        if (mentry.getKey().equals("id")) {
+                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
+                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                            P7.setIcon(new javax.swing.ImageIcon(scaleImage));
+                        }
+                        if (mentry.getKey().equals("name")) {
+                            N7.setText("ชื่อ: " + mentry.getValue());
+                        }
+                        if (mentry.getKey().equals("price")) {
+                            M7.setText("ราคา: " + mentry.getValue());
+                        }
+
+                    }
+
+                    if (round == 4) {
+                        if (mentry.getKey().equals("id")) {
+                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
+                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                            P8.setIcon(new javax.swing.ImageIcon(scaleImage));
+                        }
+                        if (mentry.getKey().equals("name")) {
+                            N8.setText("ชื่อ: " + mentry.getValue());
+                        }
+                        if (mentry.getKey().equals("price")) {
+                            M8.setText("ราคา: " + mentry.getValue());
+                        }
+
+                    }
                 }
-                
-                if(timesec == 3){
-                    timesec = 0;
-                }
-                System.out.println(timesec);
-	}
+                round++;
+                i++;
+            } else {
+                i++;
+            }
 
+        }
+
+    }
 }
