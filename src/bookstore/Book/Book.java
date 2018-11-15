@@ -10,10 +10,8 @@ package bookstore.Book;
  * @author Nitipon Chingthong
  */
 public class Book {
-    public static String id, name, Author, nameAuthor, priceBook, publisher, typeBook, publishYear, Numpage,ISBN; 
+    public static String id, name,  author, priceBook, publisher, typeBook, publishYear, numPage,ISBN,numPrint,status; 
 
-    public Book() {
-    }
 
     public static String getId() {
         return id;
@@ -31,20 +29,14 @@ public class Book {
         Book.name = name;
     }
 
-    public static String getAuthor() {
-        return Author;
-    }
-
-    public static void setAuthor(String Author) {
-        Book.Author = Author;
-    }
+ 
 
     public static String getNameAuthor() {
-        return nameAuthor;
+        return author;
     }
 
     public static void setNameAuthor(String nameAuthor) {
-        Book.nameAuthor = nameAuthor;
+        Book.author = nameAuthor;
     }
 
     public static String getPriceBook() {
@@ -80,11 +72,11 @@ public class Book {
     }
 
     public static String getNumpage() {
-        return Numpage;
+        return numPage;
     }
 
     public static void setNumpage(String Numpage) {
-        Book.Numpage = Numpage;
+        Book.numPage = Numpage;
     }
 
     public static String getISBN() {

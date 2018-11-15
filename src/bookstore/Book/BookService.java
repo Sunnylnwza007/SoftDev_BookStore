@@ -5,16 +5,14 @@
  */
 package bookstore.Book;
 
-import bookstore.Database.DatabaseConnect;
 import java.util.Map;
 /**
  *
  * @author Nitipon Chingthong
  */
 public class BookService {
-    public static Map<String, String> getBookList(int i){
-        
-        return DatabaseConnect.getBookList(i);
+    public static String getBook(int i){
+        return BookDAO.getBook(i);
     };
     
 }

@@ -5,6 +5,8 @@
  */
 package bookstore;
 
+import bookstore.Book.Book;
+import bookstore.Book.BookDAO;
 import bookstore.Book.BookService;
 import bookstore.Database.User;
 import bookstore.Register.Register;
@@ -14,7 +16,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
-import bookstore.Database.DatabaseConnect;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -179,25 +180,25 @@ public class Main extends javax.swing.JFrame {
         P8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/5.jpg"))); // NOI18N
         P8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P8);
-        P8.setBounds(690, 450, 120, 160);
+        P8.setBounds(690, 460, 120, 160);
 
         P7.setBackground(new java.awt.Color(0, 0, 0));
         P7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/9.jpg"))); // NOI18N
         P7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P7);
-        P7.setBounds(480, 450, 120, 160);
+        P7.setBounds(480, 460, 120, 160);
 
         P6.setBackground(new java.awt.Color(0, 0, 0));
         P6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/3.jpg"))); // NOI18N
         P6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P6);
-        P6.setBounds(270, 450, 120, 160);
+        P6.setBounds(270, 460, 120, 160);
 
         P5.setBackground(new java.awt.Color(0, 0, 0));
         P5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/12.jpg"))); // NOI18N
         P5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(P5);
-        P5.setBounds(60, 450, 120, 160);
+        P5.setBounds(60, 460, 120, 160);
 
         jLabel7.setFont(new java.awt.Font("Cloud Light", 1, 18)); // NOI18N
         jLabel7.setText("หนังสือแนะนำ");
@@ -207,7 +208,7 @@ public class Main extends javax.swing.JFrame {
         Banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/NewBook.jpg"))); // NOI18N
         getContentPane().add(Banner);
-        Banner.setBounds(150, 150, 790, 270);
+        Banner.setBounds(60, 150, 790, 270);
 
         ABook.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ABook.setForeground(new java.awt.Color(255, 0, 0));
@@ -225,7 +226,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ABook);
-        ABook.setBounds(740, 420, 200, 20);
+        ABook.setBounds(720, 430, 200, 20);
 
         N8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         N8.setText("ไม่พบข้อมูล");
@@ -299,15 +300,15 @@ public class Main extends javax.swing.JFrame {
 
         passText.setText("Password");
         getContentPane().add(passText);
-        passText.setBounds(920, 50, 46, 44);
+        passText.setBounds(920, 50, 58, 44);
 
         userText.setText("Username");
         getContentPane().add(userText);
-        userText.setBounds(920, 20, 48, 44);
+        userText.setBounds(920, 20, 59, 44);
         getContentPane().add(userField);
-        userField.setBounds(990, 30, 126, 20);
+        userField.setBounds(990, 30, 126, 24);
         getContentPane().add(passField);
-        passField.setBounds(990, 60, 126, 20);
+        passField.setBounds(990, 60, 126, 24);
 
         statusText.setBackground(new java.awt.Color(255, 255, 255));
         statusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -380,7 +381,7 @@ public class Main extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
-        Timee();
+        time();
         showBook();
     }//GEN-LAST:event_formWindowOpened
 
@@ -480,19 +481,19 @@ public class Main extends javax.swing.JFrame {
 
     }
 
-    void Timee() {
+    void time() {
         java.util.Timer myTimer;
         myTimer = new java.util.Timer();
 
         myTimer.schedule(new TimerTask() {
             public void run() {
-                timerTick();
+                showBanner();
             }
         }, 0, 6000);
 
     }
 
-    void timerTick() {
+    void showBanner() {
         timesec++;
         if (timesec == 3) {
             Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
@@ -509,87 +510,58 @@ public class Main extends javax.swing.JFrame {
     }
 
     void showBook() {
-        int i = 1;
-        int round = 1;
-        while (true) {
-            if (round > 4) {
-                break;
-            }
-
-            if (BookService.getBookList(i) != null) {
-                Set set = DatabaseConnect.getBookList(i).entrySet();
-                Iterator iterator = set.iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry mentry = (Map.Entry) iterator.next();
-
-                    if (round == 1) {
-                        if (mentry.getKey().equals("id")) {
-                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
-                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-                            P5.setIcon(new javax.swing.ImageIcon(scaleImage));
-                        }
-
-                        if (mentry.getKey().equals("name")) {
-                            N5.setText("ชื่อ: " + mentry.getValue());
-                        }
-                        if (mentry.getKey().equals("price")) {
-                            M5.setText("ราคา: " + mentry.getValue());
-                        }
-
-                    }
-
-                    if (round == 2) {
-                        if (mentry.getKey().equals("id")) {
-                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
-                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-                            P6.setIcon(new javax.swing.ImageIcon(scaleImage));
-                        }
-                        if (mentry.getKey().equals("name")) {
-                            N6.setText("ชื่อ: " + mentry.getValue());
-                        }
-                        if (mentry.getKey().equals("price")) {
-                            M6.setText("ราคา: " + mentry.getValue());
-                        }
-
-                    }
-
-                    if (round == 3) {
-                        if (mentry.getKey().equals("id")) {
-                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
-                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-                            P7.setIcon(new javax.swing.ImageIcon(scaleImage));
-                        }
-                        if (mentry.getKey().equals("name")) {
-                            N7.setText("ชื่อ: " + mentry.getValue());
-                        }
-                        if (mentry.getKey().equals("price")) {
-                            M7.setText("ราคา: " + mentry.getValue());
-                        }
-
-                    }
-
-                    if (round == 4) {
-                        if (mentry.getKey().equals("id")) {
-                            ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + mentry.getValue() + ".jpg");
-                            Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-                            P8.setIcon(new javax.swing.ImageIcon(scaleImage));
-                        }
-                        if (mentry.getKey().equals("name")) {
-                            N8.setText("ชื่อ: " + mentry.getValue());
-                        }
-                        if (mentry.getKey().equals("price")) {
-                            M8.setText("ราคา: " + mentry.getValue());
-                        }
-
-                    }
-                }
-                round++;
-                i++;
-            } else {
-                i++;
-            }
-
+        
+        for (int i = 2 ; i < 6 ; i++){
+            String setOfBook = BookDAO.getBook(i);
+            System.out.println(setOfBook);
+            String value[] = setOfBook.split("/");
+            String book_id = value[0];
+            String name = value[1];
+            String price = value[2];
+            String author = value[3];
+            String publisher = value[4];
+            String typeBook = value[5];
+            String publishYear = value[6];
+            String numPage = value[7];
+            String ISBN = value[8];
+            
+            Book.setId(book_id);
+            Book.setName(name);
+            Book.setPriceBook(price);
+            Book.setNameAuthor(author);
+            Book.setPublisher(publisher);
+            Book.setTypeBook(typeBook);
+            Book.setPublishYear(publishYear);
+            Book.setNumpage(numPage);
+            Book.setISBN(ISBN);
+            
+        if (i == 2){
+           
+        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
+        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+        P5.setIcon(new javax.swing.ImageIcon(scaleImage));
+        N5.setText(name);
+        M5.setText("ราคา : " + price);
+        }else if (i == 3){
+        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
+        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+        P6.setIcon(new javax.swing.ImageIcon(scaleImage));
+        N6.setText(name);
+        M6.setText("ราคา : " + price);
+        }else if (i == 4){
+        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
+        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+        P7.setIcon(new javax.swing.ImageIcon(scaleImage)); 
+        N7.setText(name);
+        M7.setText("ราคา : " + price);
+        }else if (i == 5){
+        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
+        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+        P8.setIcon(new javax.swing.ImageIcon(scaleImage));  
+        N8.setText(name);
+        M8.setText("ราคา : " + price);
         }
 
+        }
     }
 }

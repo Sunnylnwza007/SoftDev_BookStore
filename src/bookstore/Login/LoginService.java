@@ -5,18 +5,18 @@
  */
 package bookstore.Login;
 
-import bookstore.Database.DatabaseConnect;
+import bookstore.Database.UserDAO;
 
 /**
  *
  * @author KIATS
  */
 public class LoginService {
-    
+   
     public static String username , password , usertype;
 
     public static String checkUser(String username ,  String password){
-        usertype = DatabaseConnect.checkUser(username, password);
+        usertype = UserDAO.checkUser(username, password);
         return usertype;
     }
     
