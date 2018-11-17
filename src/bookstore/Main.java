@@ -46,7 +46,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        SearchBox = new javax.swing.JComboBox<>();
+        SearchBox = new javax.swing.JComboBox<String>();
         SearchField = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         SearchBut = new javax.swing.JButton();
@@ -68,9 +68,9 @@ public class Main extends javax.swing.JFrame {
         M6 = new javax.swing.JLabel();
         M5 = new javax.swing.JLabel();
         N5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        login = new javax.swing.JLabel();
+        register = new javax.swing.JLabel();
+        logout = new javax.swing.JLabel();
         passText = new javax.swing.JLabel();
         userText = new javax.swing.JLabel();
         userField = new javax.swing.JTextField();
@@ -80,6 +80,7 @@ public class Main extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
@@ -112,7 +113,7 @@ public class Main extends javax.swing.JFrame {
         SearchBox.setBackground(new java.awt.Color(153, 153, 153));
         SearchBox.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
         SearchBox.setForeground(new java.awt.Color(255, 255, 255));
-        SearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        SearchBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         SearchBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         SearchBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,47 +269,53 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(N5);
         N5.setBounds(60, 640, 170, 19);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Login");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        login.setText("Login");
+        login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                loginMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(1130, 16, 70, 20);
+        getContentPane().add(login);
+        login.setBounds(1130, 16, 70, 20);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Register");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        register.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        register.setText("Register");
+        register.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                registerMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(1130, 46, 70, 20);
+        getContentPane().add(register);
+        register.setBounds(1130, 46, 70, 20);
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Logout");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logout.setText("Logout");
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                logoutMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(1130, 76, 70, 20);
+        getContentPane().add(logout);
+        logout.setBounds(1130, 76, 70, 20);
 
         passText.setText("Password");
         getContentPane().add(passText);
-        passText.setBounds(920, 50, 58, 44);
+        passText.setBounds(920, 50, 55, 44);
 
         userText.setText("Username");
         getContentPane().add(userText);
-        userText.setBounds(920, 20, 59, 44);
+        userText.setBounds(920, 20, 58, 44);
+
+        userField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userFieldActionPerformed(evt);
+            }
+        });
         getContentPane().add(userField);
-        userField.setBounds(990, 30, 126, 24);
+        userField.setBounds(990, 30, 126, 22);
         getContentPane().add(passField);
-        passField.setBounds(990, 60, 126, 24);
+        passField.setBounds(990, 60, 126, 22);
 
         statusText.setBackground(new java.awt.Color(255, 255, 255));
         statusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -332,6 +339,10 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setText("ติดต่อสอบถาม 0 2826 8753 4");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(1010, 640, 160, 16);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Document 9.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 10, 110, 90);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -365,7 +376,7 @@ public class Main extends javax.swing.JFrame {
         ABook.setText("ดูรายการสินค้าเพิ่มเติม >>");
     }//GEN-LAST:event_ABookMouseExited
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
         String check = " ";
         check = LoginService.checkUser(userField.getText(), passField.getText());
         if (check.equals("admin") || check.equals("user")) {
@@ -376,7 +387,7 @@ public class Main extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, check);
 
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_loginMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setSize(1200, 700);
@@ -385,15 +396,19 @@ public class Main extends javax.swing.JFrame {
         showBook();
     }//GEN-LAST:event_formWindowOpened
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_logoutMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerMouseClicked
         Register register = new Register();
         register.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel4MouseClicked
+        
+    }//GEN-LAST:event_registerMouseClicked
+
+    private void userFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,15 +471,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel login;
+    private javax.swing.JLabel logout;
     private javax.swing.JTextField passField;
     private javax.swing.JLabel passText;
+    private javax.swing.JLabel register;
     private javax.swing.JLabel statusText;
     private javax.swing.JTextField userField;
     private javax.swing.JLabel userText;

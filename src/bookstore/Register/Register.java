@@ -5,6 +5,8 @@
  */
 package bookstore.Register;
 
+import bookstore.Main;
+
 /**
  *
  * @author KIATS
@@ -27,7 +29,18 @@ public class Register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        comPassword = new javax.swing.JTextField();
+        name1 = new javax.swing.JTextField();
+        ja = new javax.swing.JLabel();
+        surname1 = new javax.swing.JTextField();
+        ja1 = new javax.swing.JLabel();
+        email1 = new javax.swing.JTextField();
+        ja2 = new javax.swing.JLabel();
+        password1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -38,26 +51,119 @@ public class Register extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(600, 453, 77, 32);
+        getContentPane().add(back);
+        back.setBounds(1060, 630, 100, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setText("ชื่อ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(310, 150, 60, 40);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel2.setText("นามสกุล");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(310, 230, 90, 30);
+
+        comPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comPasswordActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comPassword);
+        comPassword.setBounds(570, 480, 220, 40);
+
+        name1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(name1);
+        name1.setBounds(570, 150, 220, 40);
+
+        ja.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        ja.setText("ยืนยันรหัสผ่าน");
+        getContentPane().add(ja);
+        ja.setBounds(310, 490, 130, 30);
+
+        surname1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surname1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(surname1);
+        surname1.setBounds(570, 230, 220, 40);
+
+        ja1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        ja1.setText("อีเมลในการเข้าสู่ระบบ");
+        getContentPane().add(ja1);
+        ja1.setBounds(310, 310, 200, 40);
+
+        email1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(email1);
+        email1.setBounds(570, 310, 220, 40);
+
+        ja2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        ja2.setText("รหัสผ่าน");
+        getContentPane().add(ja2);
+        ja2.setBounds(310, 400, 70, 30);
+
+        password1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                password1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(password1);
+        password1.setBounds(570, 390, 220, 40);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/1200-110.PNG"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 1200, 110);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.setSize(700,500);
+        this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        Main main = new Main();
+        main.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_backActionPerformed
+
+    private void comPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comPasswordActionPerformed
+
+    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email1ActionPerformed
+
+    private void password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_password1ActionPerformed
+
+    private void name1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name1ActionPerformed
+
+    private void surname1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surname1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surname1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,6 +201,17 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton back;
+    private javax.swing.JTextField comPassword;
+    private javax.swing.JTextField email1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel ja;
+    private javax.swing.JLabel ja1;
+    private javax.swing.JLabel ja2;
+    private javax.swing.JTextField name1;
+    private javax.swing.JTextField password1;
+    private javax.swing.JTextField surname1;
     // End of variables declaration//GEN-END:variables
 }
