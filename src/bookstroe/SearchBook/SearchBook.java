@@ -42,6 +42,7 @@ public class SearchBook extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1200, 700));
         setPreferredSize(new java.awt.Dimension(1200, 700));
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 700));
