@@ -286,50 +286,86 @@ public class AllBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBackActionPerformed
+        backToMain();
+    }//GEN-LAST:event_searchBackActionPerformed
+
+    private void backToMain() {
         Main main = new Main();
         main.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_searchBackActionPerformed
+    }
 
     private void imgBook4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook4MouseClicked
-        DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book4));
+        openDetailBook4();
     }//GEN-LAST:event_imgBook4MouseClicked
 
-    private void imgBook3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook3MouseClicked
+    public void openDetailBook4() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book3));
+        detailBook.openProductDetailUi(Integer.toString(book4));
+    }
+
+    private void imgBook3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook3MouseClicked
+        openDetailBook3();
     }//GEN-LAST:event_imgBook3MouseClicked
 
-    private void imgBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook2MouseClicked
+    public void openDetailBook3() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book2));
+        detailBook.openProductDetailUi(Integer.toString(book3));
+    }
+
+    private void imgBook2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook2MouseClicked
+        openDetailBook2();
     }//GEN-LAST:event_imgBook2MouseClicked
 
-    private void imgBook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook1MouseClicked
+    public void openDetailBook2() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book1));
+        detailBook.openProductDetailUi(Integer.toString(book2));
+    }
+
+    private void imgBook1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook1MouseClicked
+        openDetailBook1();
     }//GEN-LAST:event_imgBook1MouseClicked
 
-    private void imgBook8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook8MouseClicked
+    public void openDetailBook1() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book8));
+        detailBook.openProductDetailUi(Integer.toString(book1));
+    }
+
+    private void imgBook8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook8MouseClicked
+        openDetailBook8();
     }//GEN-LAST:event_imgBook8MouseClicked
 
-    private void imgBook7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook7MouseClicked
+    public void openDetailBook8() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book7));
+        detailBook.openProductDetailUi(Integer.toString(book8));
+    }
+
+    private void imgBook7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook7MouseClicked
+        openDetailBook7();
     }//GEN-LAST:event_imgBook7MouseClicked
 
-    private void imgBook6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook6MouseClicked
+    public void openDetailBook7() {
         DetailBook detailBook = new DetailBook();
-        detailBook.openProductDetailUi(Integer.toString(book6));
+        detailBook.openProductDetailUi(Integer.toString(book7));
+    }
+
+    private void imgBook6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook6MouseClicked
+        openDetailBook6();
     }//GEN-LAST:event_imgBook6MouseClicked
 
+    public void openDetailBook6() {
+        DetailBook detailBook = new DetailBook();
+        detailBook.openProductDetailUi(Integer.toString(book6));
+    }
+
     private void imgBook5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBook5MouseClicked
+        openDetailBook5();
+    }//GEN-LAST:event_imgBook5MouseClicked
+
+    public void openDetailBook5() {
         DetailBook detailBook = new DetailBook();
         detailBook.openProductDetailUi(Integer.toString(book5));
-    }//GEN-LAST:event_imgBook5MouseClicked
+    }
 
     private void nextPageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextPageMouseClicked
         pageNum.setText((Integer.parseInt(pageNum.getText()) + 1) + "");

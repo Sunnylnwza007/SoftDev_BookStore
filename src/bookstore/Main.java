@@ -424,10 +424,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void allBookButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allBookButtonMouseClicked
+        openAllBookUi();
+    }//GEN-LAST:event_allBookButtonMouseClicked
+
+    public void openAllBookUi() {
         AllBook allBook = new AllBook();
         allBook.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_allBookButtonMouseClicked
+    }
 
     private void allBookButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allBookButtonMouseEntered
         allBookButton.setText("<HTML><U>View more products.</U></HTML>");
