@@ -5,19 +5,26 @@
  */
 package bookstore;
 
+import bookstore.AllBook.AllBook;
 import bookstore.Book.Book;
 import bookstore.Book.BookDAO;
+import bookstore.Detail.DetailBook;
 import bookstore.Book.BookService;
+import bookstore.CartBook.CartBook;
 import bookstore.Database.User;
 import bookstore.Register.Register;
 import bookstore.Login.LoginService;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import bookstore.SearchBook.SearchBook;
+import bookstore.SearchBook.SearchBookService;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
+import java.awt.HeadlessException;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.util.Timer;
 
 /**
  *
@@ -25,7 +32,8 @@ import javax.swing.ImageIcon;
  */
 public class Main extends javax.swing.JFrame {
 
-    static int timesec = 0;
+    static int timesec = 0, timer = 0;
+    public static String idBook1 = "1", idBook2 = "2", idBook3 = "3", idBook4 = "4";
 
     /**
      * Creates new form Main
@@ -43,44 +51,46 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        SearchBox = new javax.swing.JComboBox<String>();
-        SearchField = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        SearchBut = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        P8 = new javax.swing.JLabel();
-        P7 = new javax.swing.JLabel();
-        P6 = new javax.swing.JLabel();
-        P5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        Banner = new javax.swing.JLabel();
-        ABook = new javax.swing.JLabel();
-        N8 = new javax.swing.JLabel();
-        M8 = new javax.swing.JLabel();
-        M7 = new javax.swing.JLabel();
-        N7 = new javax.swing.JLabel();
-        N6 = new javax.swing.JLabel();
-        M6 = new javax.swing.JLabel();
-        M5 = new javax.swing.JLabel();
-        N5 = new javax.swing.JLabel();
-        login = new javax.swing.JLabel();
-        register = new javax.swing.JLabel();
-        logout = new javax.swing.JLabel();
-        passText = new javax.swing.JLabel();
-        userText = new javax.swing.JLabel();
+        blackTab = new javax.swing.JPanel();
+        searchPanel = new javax.swing.JPanel();
+        searchText = new javax.swing.JLabel();
+        cartButton = new javax.swing.JLabel();
+        searchBox = new javax.swing.JComboBox<>();
+        searchField = new javax.swing.JTextField();
+        searchLeft = new javax.swing.JTextField();
+        search = new javax.swing.JButton();
+        searchRight = new javax.swing.JTextField();
+        banner2 = new javax.swing.JLabel();
+        bookImg4 = new javax.swing.JLabel();
+        bookImg3 = new javax.swing.JLabel();
+        bookImg2 = new javax.swing.JLabel();
+        bookImg1 = new javax.swing.JLabel();
+        recommendBook = new javax.swing.JLabel();
+        banner = new javax.swing.JLabel();
+        allBookButton = new javax.swing.JLabel();
+        bookName4 = new javax.swing.JLabel();
+        priceBook4 = new javax.swing.JLabel();
+        priceBook3 = new javax.swing.JLabel();
+        bookName3 = new javax.swing.JLabel();
+        bookName2 = new javax.swing.JLabel();
+        priceBook2 = new javax.swing.JLabel();
+        priceBook1 = new javax.swing.JLabel();
+        bookName1 = new javax.swing.JLabel();
+        logInButton = new javax.swing.JLabel();
+        registerButton = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JLabel();
+        passLabel = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
         userField = new javax.swing.JTextField();
-        passField = new javax.swing.JTextField();
-        statusText = new javax.swing.JLabel();
+        statusLabel = new javax.swing.JLabel();
+        passField = new javax.swing.JPasswordField();
         Banner1 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        banner1 = new javax.swing.JLabel();
+        banner3 = new javax.swing.JLabel();
+        banner3Label = new javax.swing.JLabel();
+        shopIcon = new javax.swing.JLabel();
+        exitButton = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
@@ -92,323 +102,453 @@ public class Main extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setLayout(null);
+        blackTab.setBackground(new java.awt.Color(0, 0, 0));
+        blackTab.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        blackTab.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel2.setForeground(new java.awt.Color(255, 51, 51));
-        jPanel2.setLayout(null);
+        searchPanel.setBackground(new java.awt.Color(0, 0, 0));
+        searchPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        searchPanel.setForeground(new java.awt.Color(255, 51, 51));
+        searchPanel.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ค้นหา");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(20, 0, 40, 30);
+        searchText.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
+        searchText.setForeground(new java.awt.Color(255, 255, 255));
+        searchText.setText("Search");
+        searchPanel.add(searchText);
+        searchText.setBounds(10, 0, 70, 30);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(210, 0, 80, 30);
+        blackTab.add(searchPanel);
+        searchPanel.setBounds(210, 0, 80, 30);
 
-        SearchBox.setBackground(new java.awt.Color(153, 153, 153));
-        SearchBox.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
-        SearchBox.setForeground(new java.awt.Color(255, 255, 255));
-        SearchBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        SearchBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        SearchBox.addActionListener(new java.awt.event.ActionListener() {
+        cartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/cartButton.png"))); // NOI18N
+        cartButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cartButtonMouseClicked(evt);
+            }
+        });
+        blackTab.add(cartButton);
+        cartButton.setBounds(1070, 0, 40, 30);
+
+        searchBox.setBackground(new java.awt.Color(153, 153, 153));
+        searchBox.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
+        searchBox.setForeground(new java.awt.Color(255, 255, 255));
+        searchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "Writer" }));
+        searchBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        blackTab.add(searchBox);
+        searchBox.setBounds(90, 0, 120, 30);
+
+        searchField.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
+        searchField.setForeground(new java.awt.Color(153, 153, 153));
+        searchField.setText("-Type to search-");
+        searchField.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        searchField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchFieldMouseClicked(evt);
+            }
+        });
+        blackTab.add(searchField);
+        searchField.setBounds(310, 0, 560, 30);
+
+        searchLeft.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
+        searchLeft.setForeground(new java.awt.Color(153, 153, 153));
+        searchLeft.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        searchLeft.setEnabled(false);
+        blackTab.add(searchLeft);
+        searchLeft.setBounds(290, 0, 30, 30);
+
+        search.setBackground(new java.awt.Color(255, 0, 0));
+        search.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
+        search.setText("Search");
+        search.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchBoxActionPerformed(evt);
+                searchActionPerformed(evt);
             }
         });
-        jPanel1.add(SearchBox);
-        SearchBox.setBounds(90, 0, 120, 30);
+        blackTab.add(search);
+        search.setBounds(910, 0, 110, 30);
 
-        SearchField.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
-        SearchField.setForeground(new java.awt.Color(153, 153, 153));
-        SearchField.setText("-พิมพ์เพื่อค้นหา-");
-        SearchField.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        SearchField.addMouseListener(new java.awt.event.MouseAdapter() {
+        searchRight.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
+        searchRight.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        searchRight.setEnabled(false);
+        blackTab.add(searchRight);
+        searchRight.setBounds(860, 0, 30, 30);
+
+        getContentPane().add(blackTab);
+        blackTab.setBounds(0, 110, 1220, 30);
+
+        banner2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        banner2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Pro1.PNG"))); // NOI18N
+        getContentPane().add(banner2);
+        banner2.setBounds(970, 350, 210, 220);
+
+        bookImg4.setBackground(new java.awt.Color(0, 0, 0));
+        bookImg4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/5.jpg"))); // NOI18N
+        bookImg4.setText("4");
+        bookImg4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bookImg4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SearchFieldMouseClicked(evt);
+                showProductDetail4(evt);
             }
         });
-        jPanel1.add(SearchField);
-        SearchField.setBounds(310, 0, 560, 30);
+        getContentPane().add(bookImg4);
+        bookImg4.setBounds(690, 460, 120, 160);
 
-        jTextField3.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jTextField3.setEnabled(false);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(290, 0, 30, 30);
-
-        SearchBut.setBackground(new java.awt.Color(255, 0, 0));
-        SearchBut.setFont(new java.awt.Font("Cloud", 1, 14)); // NOI18N
-        SearchBut.setText("ค้นหา");
-        SearchBut.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        SearchBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchButActionPerformed(evt);
-            }
-        });
-        jPanel1.add(SearchBut);
-        SearchBut.setBounds(910, 0, 110, 30);
-
-        jTextField5.setFont(new java.awt.Font("Cloud", 0, 14)); // NOI18N
-        jTextField5.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jTextField5.setEnabled(false);
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(860, 0, 30, 30);
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookImg3.setBackground(new java.awt.Color(0, 0, 0));
+        bookImg3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/9.jpg"))); // NOI18N
+        bookImg3.setText("3");
+        bookImg3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bookImg3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                showProductDetail3(evt);
             }
         });
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(1050, 0, 50, 30);
+        getContentPane().add(bookImg3);
+        bookImg3.setBounds(480, 460, 120, 160);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 110, 1220, 30);
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Pro1.PNG"))); // NOI18N
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(970, 350, 210, 220);
-
-        P8.setBackground(new java.awt.Color(0, 0, 0));
-        P8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/5.jpg"))); // NOI18N
-        P8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(P8);
-        P8.setBounds(690, 460, 120, 160);
-
-        P7.setBackground(new java.awt.Color(0, 0, 0));
-        P7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/9.jpg"))); // NOI18N
-        P7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(P7);
-        P7.setBounds(480, 460, 120, 160);
-
-        P6.setBackground(new java.awt.Color(0, 0, 0));
-        P6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/3.jpg"))); // NOI18N
-        P6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(P6);
-        P6.setBounds(270, 460, 120, 160);
-
-        P5.setBackground(new java.awt.Color(0, 0, 0));
-        P5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/12.jpg"))); // NOI18N
-        P5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(P5);
-        P5.setBounds(60, 460, 120, 160);
-
-        jLabel7.setFont(new java.awt.Font("Cloud Light", 1, 18)); // NOI18N
-        jLabel7.setText("หนังสือแนะนำ");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 420, 230, 30);
-
-        Banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/NewBook.jpg"))); // NOI18N
-        getContentPane().add(Banner);
-        Banner.setBounds(60, 150, 790, 270);
-
-        ABook.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        ABook.setForeground(new java.awt.Color(255, 0, 0));
-        ABook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ABook.setText("ดูรายการสินค้าเพิ่มเติม >>");
-        ABook.addMouseListener(new java.awt.event.MouseAdapter() {
+        bookImg2.setBackground(new java.awt.Color(0, 0, 0));
+        bookImg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/3.jpg"))); // NOI18N
+        bookImg2.setText("2");
+        bookImg2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bookImg2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ABookMouseClicked(evt);
+                showProductDetail2(evt);
+            }
+        });
+        getContentPane().add(bookImg2);
+        bookImg2.setBounds(270, 460, 120, 160);
+
+        bookImg1.setBackground(new java.awt.Color(0, 0, 0));
+        bookImg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Book/12.jpg"))); // NOI18N
+        bookImg1.setText("1");
+        bookImg1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bookImg1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showProductDetail1(evt);
+            }
+        });
+        getContentPane().add(bookImg1);
+        bookImg1.setBounds(60, 460, 120, 160);
+
+        recommendBook.setFont(new java.awt.Font("Cloud Light", 1, 18)); // NOI18N
+        recommendBook.setText("Recommend Books");
+        getContentPane().add(recommendBook);
+        recommendBook.setBounds(10, 420, 230, 40);
+
+        banner.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/NewBook.jpg"))); // NOI18N
+        getContentPane().add(banner);
+        banner.setBounds(60, 150, 790, 270);
+
+        allBookButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        allBookButton.setForeground(new java.awt.Color(255, 0, 0));
+        allBookButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        allBookButton.setText("View more products");
+        allBookButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                allBookButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ABookMouseEntered(evt);
+                allBookButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ABookMouseExited(evt);
+                allBookButtonMouseExited(evt);
             }
         });
-        getContentPane().add(ABook);
-        ABook.setBounds(720, 430, 200, 20);
+        getContentPane().add(allBookButton);
+        allBookButton.setBounds(700, 430, 150, 20);
 
-        N8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        N8.setText("ไม่พบข้อมูล");
-        getContentPane().add(N8);
-        N8.setBounds(690, 640, 170, 19);
+        bookName4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bookName4.setText("ไม่พบข้อมูล");
+        getContentPane().add(bookName4);
+        bookName4.setBounds(690, 640, 170, 19);
 
-        M8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        M8.setText("ไม่พบข้อมูล");
-        getContentPane().add(M8);
-        M8.setBounds(690, 670, 120, 19);
+        priceBook4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        priceBook4.setText("ไม่พบข้อมูล");
+        getContentPane().add(priceBook4);
+        priceBook4.setBounds(690, 670, 120, 19);
 
-        M7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        M7.setText("ไม่พบข้อมูล");
-        getContentPane().add(M7);
-        M7.setBounds(480, 670, 120, 19);
+        priceBook3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        priceBook3.setText("ไม่พบข้อมูล");
+        getContentPane().add(priceBook3);
+        priceBook3.setBounds(480, 670, 120, 19);
 
-        N7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        N7.setText("ไม่พบข้อมูล");
-        getContentPane().add(N7);
-        N7.setBounds(480, 640, 170, 19);
+        bookName3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bookName3.setText("ไม่พบข้อมูล");
+        getContentPane().add(bookName3);
+        bookName3.setBounds(480, 640, 170, 19);
 
-        N6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        N6.setText("ไม่พบข้อมูล");
-        getContentPane().add(N6);
-        N6.setBounds(270, 640, 170, 19);
+        bookName2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bookName2.setText("ไม่พบข้อมูล");
+        getContentPane().add(bookName2);
+        bookName2.setBounds(270, 640, 170, 19);
 
-        M6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        M6.setText("ไม่พบข้อมูล");
-        getContentPane().add(M6);
-        M6.setBounds(270, 670, 120, 19);
+        priceBook2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        priceBook2.setText("ไม่พบข้อมูล");
+        getContentPane().add(priceBook2);
+        priceBook2.setBounds(270, 670, 120, 19);
 
-        M5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        M5.setText("ไม่พบข้อมูล");
-        getContentPane().add(M5);
-        M5.setBounds(60, 670, 120, 19);
+        priceBook1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        priceBook1.setText("ไม่พบข้อมูล");
+        getContentPane().add(priceBook1);
+        priceBook1.setBounds(60, 670, 120, 19);
 
-        N5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        N5.setText("ไม่พบข้อมูล");
-        getContentPane().add(N5);
-        N5.setBounds(60, 640, 170, 19);
+        bookName1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        bookName1.setText("ไม่พบข้อมูล");
+        getContentPane().add(bookName1);
+        bookName1.setBounds(60, 640, 170, 19);
 
-        login.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        login.setText("Login");
-        login.addMouseListener(new java.awt.event.MouseAdapter() {
+        logInButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logInButton.setText("Login");
+        logInButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logInButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginMouseClicked(evt);
+                logInButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(login);
-        login.setBounds(1130, 16, 70, 20);
+        getContentPane().add(logInButton);
+        logInButton.setBounds(1120, 30, 70, 20);
 
-        register.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        register.setText("Register");
-        register.addMouseListener(new java.awt.event.MouseAdapter() {
+        registerButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        registerButton.setText("Register");
+        registerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        registerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerMouseClicked(evt);
+                registerButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(register);
-        register.setBounds(1130, 46, 70, 20);
+        getContentPane().add(registerButton);
+        registerButton.setBounds(1120, 60, 70, 20);
 
-        logout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logout.setText("Logout");
-        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+        logoutButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoutButton.setText("Logout");
+        logoutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logoutMouseClicked(evt);
+                logoutButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(logout);
-        logout.setBounds(1130, 76, 70, 20);
+        getContentPane().add(logoutButton);
+        logoutButton.setBounds(1120, 30, 70, 60);
 
-        passText.setText("Password");
-        getContentPane().add(passText);
-        passText.setBounds(920, 50, 55, 44);
+        passLabel.setText("Password");
+        getContentPane().add(passLabel);
+        passLabel.setBounds(900, 50, 58, 44);
 
-        userText.setText("Username");
-        getContentPane().add(userText);
-        userText.setBounds(920, 20, 58, 44);
-
-        userField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userFieldActionPerformed(evt);
-            }
-        });
+        userLabel.setText("Username");
+        getContentPane().add(userLabel);
+        userLabel.setBounds(900, 20, 59, 44);
         getContentPane().add(userField);
-        userField.setBounds(990, 30, 126, 22);
+        userField.setBounds(970, 24, 130, 30);
+
+        statusLabel.setBackground(new java.awt.Color(255, 255, 255));
+        statusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        statusLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(statusLabel);
+        statusLabel.setBounds(870, 20, 240, 80);
         getContentPane().add(passField);
-        passField.setBounds(990, 60, 126, 22);
-
-        statusText.setBackground(new java.awt.Color(255, 255, 255));
-        statusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(statusText);
-        statusText.setBounds(900, 10, 240, 90);
+        passField.setBounds(970, 60, 130, 30);
         getContentPane().add(Banner1);
-        Banner1.setBounds(70, 110, 790, 290);
+        Banner1.setBounds(50, 140, 790, 290);
 
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Deal 20-80.png"))); // NOI18N
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(990, 190, 170, 170);
+        banner1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        banner1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Deal 20-80.png"))); // NOI18N
+        getContentPane().add(banner1);
+        banner1.setBounds(990, 190, 170, 170);
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Freetran.png"))); // NOI18N
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(960, 570, 220, 70);
+        banner3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Freetran.png"))); // NOI18N
+        getContentPane().add(banner3);
+        banner3.setBounds(960, 570, 220, 70);
 
-        jLabel10.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel10.setText("ติดต่อสอบถาม 0 2826 8753 4");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(1010, 640, 160, 16);
+        banner3Label.setBackground(new java.awt.Color(204, 204, 204));
+        banner3Label.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        banner3Label.setForeground(new java.awt.Color(153, 153, 153));
+        banner3Label.setText("ติดต่อสอบถาม 0 2826 8753 4");
+        getContentPane().add(banner3Label);
+        banner3Label.setBounds(1010, 640, 160, 16);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Document 9.png"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 10, 110, 90);
+        shopIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/Document 9.png"))); // NOI18N
+        getContentPane().add(shopIcon);
+        shopIcon.setBounds(10, 10, 110, 90);
+
+        exitButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/exitButton2.png"))); // NOI18N
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitButtonMouseClicked(evt);
+            }
+        });
+        getContentPane().add(exitButton);
+        exitButton.setBounds(1180, 0, 20, 20);
+
+        background.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1200, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SearchBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SearchBoxActionPerformed
+    private void searchFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFieldMouseClicked
+        searchField.setText("");
+    }//GEN-LAST:event_searchFieldMouseClicked
 
-    private void SearchFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchFieldMouseClicked
-        SearchField.setText("");
-    }//GEN-LAST:event_SearchFieldMouseClicked
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+       if (checkBookIfFound()){
+           openSearchUi();
+       }
+        
+    }//GEN-LAST:event_searchActionPerformed
 
-    private void SearchButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButActionPerformed
+    public boolean checkBookIfFound(){
+        if ( !searchField.getText().equals("") && !searchField.getText().contains("-Type to search-")) {
+            int countBook = SearchBookService.getBookName(searchBox.getSelectedItem().toString().toLowerCase(),
+                    searchField.getText());
+            
+            if ( countBook != 0 ) {   
+               return true;
+            }
+            else {
+                JOptionPane.showMessageDialog( null, "Book Not Found." );
+                return false;
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog( null, "Please enter a text.");
+            return false;
+        }
+    }
+    public void openSearchUi() throws HeadlessException { 
+        SearchBook searchBook = new SearchBook();
+        searchBook.setTextSearch(searchBox.getSelectedItem().toString().toLowerCase(), searchField.getText());
+        searchBook.setVisible(true);
+    }
 
-    }//GEN-LAST:event_SearchButActionPerformed
+    private void allBookButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allBookButtonMouseClicked
+        AllBook allBook = new AllBook();
+        allBook.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_allBookButtonMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void allBookButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allBookButtonMouseEntered
+        allBookButton.setText("<HTML><U>View more products.</U></HTML>");
+    }//GEN-LAST:event_allBookButtonMouseEntered
 
+    private void allBookButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allBookButtonMouseExited
+        allBookButton.setText("View more products.");
+    }//GEN-LAST:event_allBookButtonMouseExited
 
-    }//GEN-LAST:event_jLabel3MouseClicked
-
-    private void ABookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseClicked
-
-    }//GEN-LAST:event_ABookMouseClicked
-
-    private void ABookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseEntered
-        ABook.setText("<HTML><U>ดูรายการสินค้าเพิ่มเติม >></U></HTML>");
-    }//GEN-LAST:event_ABookMouseEntered
-
-    private void ABookMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ABookMouseExited
-        ABook.setText("ดูรายการสินค้าเพิ่มเติม >>");
-    }//GEN-LAST:event_ABookMouseExited
-
-    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
+    private void logInButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInButtonMouseClicked
         String check = " ";
         check = LoginService.checkUser(userField.getText(), passField.getText());
-        if (check.equals("admin") || check.equals("user")) {
-            System.out.println(check);
+        
+        if (check.equals("admin") || check.equals("user") && !check.equals("")) {
+          
             setUser(check);
-        } else {
-            System.out.println("none");
+            User.setStatus();
+            logoutButton.setVisible(true);
+            logInButton.setVisible(false);
+            registerButton.setVisible(false);
         }
-        JOptionPane.showMessageDialog(null, check);
+        else if (userField.getText().equals("") || passField.getText().equals("")){
+            
+            JOptionPane.showMessageDialog(null, "Please enter a text.");
+            
+        }
+        else {
+          
+            JOptionPane.showMessageDialog(null, "Can't find user in database.");
+        }
+        
 
-    }//GEN-LAST:event_loginMouseClicked
+    }//GEN-LAST:event_logInButtonMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setSize(1200, 700);
         this.setLocationRelativeTo(null);
+        
+        if (User.getName().equals("")){
+            logoutButton.setVisible(false);
+        }
+        else {
+            statusLabel.setText(User.getName());
+            statusLabel.setVisible(true);
+            userLabel.setVisible(false);
+            userField.setVisible(false);
+            passLabel.setVisible(false);
+            passField.setVisible(false);
+            logInButton.setVisible(false);
+            registerButton.setVisible(false);
+        }
+        if (timer == 0){
         time();
+        }
         showBook();
+        
     }//GEN-LAST:event_formWindowOpened
 
-    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_logoutMouseClicked
+    private void logoutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutButtonMouseClicked
+        logoutButton.setVisible(false);
+        logInButton.setVisible(true);
+        registerButton.setVisible(true);
+        User.setUser("", "", "");
+        statusLabel.setText("");
+        statusLabel.setVisible(true);
+        userLabel.setVisible(true);
+        userField.setVisible(true);
+        passLabel.setVisible(true);
+        passField.setVisible(true);
+        userField.setText("");
+        passField.setText("");
+    }//GEN-LAST:event_logoutButtonMouseClicked
 
-    private void registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerMouseClicked
+    private void registerButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerButtonMouseClicked
         Register register = new Register();
         register.setVisible(true);
         
-    }//GEN-LAST:event_registerMouseClicked
+    }//GEN-LAST:event_registerButtonMouseClicked
 
-    private void userFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userFieldActionPerformed
+    private void showProductDetail1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showProductDetail1
+        DetailBook detailBook = new DetailBook();
+        detailBook.openProductDetailUi(idBook1);  
+    }//GEN-LAST:event_showProductDetail1
+
+    private void showProductDetail2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showProductDetail2
+        DetailBook detailBook = new DetailBook();
+        detailBook.openProductDetailUi(idBook2);  
+    }//GEN-LAST:event_showProductDetail2
+
+    private void showProductDetail3(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showProductDetail3
+        DetailBook detailBook = new DetailBook();
+        detailBook.openProductDetailUi(idBook3);  
+    }//GEN-LAST:event_showProductDetail3
+
+    private void showProductDetail4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showProductDetail4
+        DetailBook detailBook = new DetailBook();
+        detailBook.openProductDetailUi(idBook4);   
+    }//GEN-LAST:event_showProductDetail4
+
+    private void cartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartButtonMouseClicked
+        CartBook cart = new CartBook();
+        if (!User.getName().equals("")){
+            showCartUi(cart);
+        }
+        else {
+            showMessageLogin();
+        }
+        
+    }//GEN-LAST:event_cartButtonMouseClicked
+
+    public void showCartUi(CartBook cart) {
+        cart.setVisible(true);
+    }
+
+    public void showMessageLogin() throws HeadlessException {
+        JOptionPane.showMessageDialog(null, "Please Login.");
+    }
+
+    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -446,138 +586,126 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ABook;
-    private static javax.swing.JLabel Banner;
     private static javax.swing.JLabel Banner1;
-    private javax.swing.JLabel M5;
-    private javax.swing.JLabel M6;
-    private javax.swing.JLabel M7;
-    private javax.swing.JLabel M8;
-    private javax.swing.JLabel N5;
-    private javax.swing.JLabel N6;
-    private javax.swing.JLabel N7;
-    private javax.swing.JLabel N8;
-    private javax.swing.JLabel P5;
-    private javax.swing.JLabel P6;
-    private javax.swing.JLabel P7;
-    private javax.swing.JLabel P8;
-    private javax.swing.JComboBox<String> SearchBox;
-    private javax.swing.JButton SearchBut;
-    private javax.swing.JTextField SearchField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JLabel login;
-    private javax.swing.JLabel logout;
-    private javax.swing.JTextField passField;
-    private javax.swing.JLabel passText;
-    private javax.swing.JLabel register;
-    private javax.swing.JLabel statusText;
+    private javax.swing.JLabel allBookButton;
+    private javax.swing.JLabel background;
+    private static javax.swing.JLabel banner;
+    private javax.swing.JLabel banner1;
+    private javax.swing.JLabel banner2;
+    private javax.swing.JLabel banner3;
+    private javax.swing.JLabel banner3Label;
+    private javax.swing.JPanel blackTab;
+    private javax.swing.JLabel bookImg1;
+    private javax.swing.JLabel bookImg2;
+    private javax.swing.JLabel bookImg3;
+    private javax.swing.JLabel bookImg4;
+    private javax.swing.JLabel bookName1;
+    private javax.swing.JLabel bookName2;
+    private javax.swing.JLabel bookName3;
+    private javax.swing.JLabel bookName4;
+    private javax.swing.JLabel cartButton;
+    private javax.swing.JLabel exitButton;
+    private javax.swing.JLabel logInButton;
+    private javax.swing.JLabel logoutButton;
+    private javax.swing.JPasswordField passField;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JLabel priceBook1;
+    private javax.swing.JLabel priceBook2;
+    private javax.swing.JLabel priceBook3;
+    private javax.swing.JLabel priceBook4;
+    private javax.swing.JLabel recommendBook;
+    private javax.swing.JLabel registerButton;
+    private javax.swing.JButton search;
+    private javax.swing.JComboBox<String> searchBox;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JTextField searchLeft;
+    private javax.swing.JPanel searchPanel;
+    private javax.swing.JTextField searchRight;
+    private javax.swing.JLabel searchText;
+    private javax.swing.JLabel shopIcon;
+    private javax.swing.JLabel statusLabel;
     private javax.swing.JTextField userField;
-    private javax.swing.JLabel userText;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
+    
 
     void setUser(String check) {
         User.setUser(userField.getText(), passField.getText(), check);
-        statusText.setText(check);
-        statusText.setVisible(true);
-        userText.setVisible(false);
+        statusLabel.setText(check);
+        statusLabel.setVisible(true);
+        userLabel.setVisible(false);
         userField.setVisible(false);
-        passText.setVisible(false);
+        passLabel.setVisible(false);
         passField.setVisible(false);
 
     }
 
     void time() {
-        java.util.Timer myTimer;
+        Timer myTimer;
+        timer = 1;
         myTimer = new java.util.Timer();
 
         myTimer.schedule(new TimerTask() {
             public void run() {
-                showBanner();
+                showBanner();       
             }
         }, 0, 6000);
-
     }
 
     void showBanner() {
         timesec++;
-        if (timesec == 3) {
-            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
-        } else if (timesec == 2) {
-            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban2.jpg"));
-        } else {
-            Banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\NewBook.jpg"));
+        if ( timesec == 3 ) {
+            banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban1.jpg"));
+        } 
+        else if ( timesec == 2 ) {
+            banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\Ban2.jpg"));
+        } 
+        else {
+            banner.setIcon(new javax.swing.ImageIcon(".\\src\\Pic\\NewBook.jpg"));
         }
 
-        if (timesec == 3) {
+        if ( timesec == 3 ) {
             timesec = 0;
         }
-        System.out.println(timesec);
     }
 
     void showBook() {
         
-        for (int i = 2 ; i < 6 ; i++){
-            String setOfBook = BookDAO.getBook(i);
-            System.out.println(setOfBook);
-            String value[] = setOfBook.split("/");
-            String book_id = value[0];
-            String name = value[1];
-            String price = value[2];
-            String author = value[3];
-            String publisher = value[4];
-            String typeBook = value[5];
-            String publishYear = value[6];
-            String numPage = value[7];
-            String ISBN = value[8];
+        for ( int i = 1 ; i < 5 ; i++ ) {
             
-            Book.setId(book_id);
-            Book.setName(name);
-            Book.setPriceBook(price);
-            Book.setNameAuthor(author);
-            Book.setPublisher(publisher);
-            Book.setTypeBook(typeBook);
-            Book.setPublishYear(publishYear);
-            Book.setNumpage(numPage);
-            Book.setISBN(ISBN);
+            SearchBookService.getBook(i);
             
-        if (i == 2){
-           
-        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
-        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-        P5.setIcon(new javax.swing.ImageIcon(scaleImage));
-        N5.setText(name);
-        M5.setText("ราคา : " + price);
-        }else if (i == 3){
-        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
-        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-        P6.setIcon(new javax.swing.ImageIcon(scaleImage));
-        N6.setText(name);
-        M6.setText("ราคา : " + price);
-        }else if (i == 4){
-        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
-        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-        P7.setIcon(new javax.swing.ImageIcon(scaleImage)); 
-        N7.setText(name);
-        M7.setText("ราคา : " + price);
-        }else if (i == 5){
-        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + book_id + ".jpg");
-        Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
-        P8.setIcon(new javax.swing.ImageIcon(scaleImage));  
-        N8.setText(name);
-        M8.setText("ราคา : " + price);
-        }
+            if ( i == 1 ) {       
+                ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + Book.getId() + ".jpg");
+                Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                bookImg1.setIcon(new javax.swing.ImageIcon(scaleImage));
+                bookName1.setText(Book.getName());
+                priceBook1.setText("Price : " + Book.getPrice());
+                
+            }
+            else if ( i == 2 ) {          
+                ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + Book.getId() + ".jpg");
+                Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                bookImg2.setIcon(new javax.swing.ImageIcon(scaleImage));
+                bookName2.setText(Book.getName());
+                priceBook2.setText("Price : " + Book.getPrice());
+            }
+            else if ( i == 3 ) {         
+                ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + Book.getId() + ".jpg");
+                Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                bookImg3.setIcon(new javax.swing.ImageIcon(scaleImage)); 
+                bookName3.setText(Book.getName());
+                priceBook3.setText("Price : " + Book.getPrice());
+            }
+            else if ( i == 4 ) {          
+                ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + Book.getId() + ".jpg");
+                Image scaleImage = icon.getImage().getScaledInstance(116, 171, Image.SCALE_DEFAULT);
+                bookImg4.setIcon(new javax.swing.ImageIcon(scaleImage));  
+                bookName4.setText(Book.getName());
+                priceBook4.setText("Price : " + Book.getPrice());
+            }
 
         }
     }
+
 }

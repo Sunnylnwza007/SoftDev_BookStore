@@ -5,19 +5,11 @@
  */
 package bookstore.Database;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import org.bson.Document;
 
 /**
@@ -32,17 +24,18 @@ public class UserDAO {
     
     public static String checkUser(String username , String password){
         String usertype = "";
-        
-        MongoCollection<Document> room = db.getCollection("user");
+        MongoCollection <Document> room = db.getCollection("user");
         Document findUser = new Document("username",username).append("password", password);
-        MongoCursor<Document> cursor = room.find(findUser).iterator();
+        MongoCursor <Document> cursor = room.find(findUser).iterator();
+        
          try {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
                 usertype = doc.getString("usertype");            
        
             }
-        } finally {}
+        } 
+         finally {}
          return usertype;
     }
     

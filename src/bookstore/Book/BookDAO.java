@@ -5,11 +5,11 @@
  */
 package bookstore.Book;
 
-import static bookstore.Database.UserDAO.db;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import java.util.HashMap;
-import java.util.Map;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 /**
@@ -18,34 +18,49 @@ import org.bson.Document;
  */
 public class BookDAO {
     
-    public static String getBook(int i){
+    public static MongoClientURI uri  = new MongoClientURI("mongodb://user01:user01@ds145563.mlab.com:45563/book_shop"); 
+    public static MongoClient client = new MongoClient(uri);
+    public static MongoDatabase db = client.getDatabase(uri.getDatabase());
+    
+    public static void getBookById (int bookId) {
         
-        String setOfBook = "";
-        MongoCollection<Document> room = db.getCollection("book");
-        Document findBook = new Document("book_id",Integer.toString(i));
-        MongoCursor<Document> cursor = room.find(findBook).iterator();
+        MongoCollection<Document> book = db.getCollection("book");
+        Document findBook = new Document("book_id",Integer.toString(bookId));
+        MongoCursor<Document> cursor = book.find(findBook).iterator();
+        
          try {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
+                
                 String book_id = doc.getString("book_id");
                 String name = doc.getString("name");
                 String price = doc.getString("price");
-                String author = doc.getString("writer");
+                String writer = doc.getString("writer");
                 String publisher = doc.getString("publisher");
-                String typeBook = doc.getString("doc_type");
-                String publishYear = doc.getString("writeyear");
-                String numPage = doc.getString("page");
-                String ISBN = doc.getString("isbn");
+                String type = doc.getString("doc_type");
+                String writeyear = doc.getString("writeyear");
+                String page = doc.getString("page");
+                String isbn = doc.getString("isbn");
+                String amount = doc.getString("amount");
+                String writenum = doc.getString("writenum");
                 
-                
-                setOfBook = book_id + "/" + name + "/" + price + "/" + author + "/" 
-                        + publisher + "/" + typeBook + "/" + publishYear + "/" 
-                        + numPage + "/" + ISBN;
-       
+                Book.setId(book_id);
+                Book.setName(name);
+                Book.setPrice(price);
+                Book.setWriter(writer);
+                Book.setPublisher(publisher);
+                Book.setType(type);
+                Book.setWriteyear(writeyear);
+                Book.setPage(page);
+                Book.setISBN(isbn);
+                Book.setAmount(amount);
+                Book.setWritenum(writenum);
             }
-        } finally {}
-         return setOfBook;
+        } 
+         finally {}
+         
     }
+    
     
     
     

@@ -13,7 +13,7 @@ import bookstore.Database.UserDAO;
  */
 public class LoginService {
    
-    public static String username , password , usertype;
+    public static String username="" , password="" , usertype="";
 
     public static String checkUser(String username ,  String password){
         usertype = UserDAO.checkUser(username, password);

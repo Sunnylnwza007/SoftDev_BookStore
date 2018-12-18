@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,14 +10,23 @@ package bookstore.Book;
  * @author Nitipon Chingthong
  */
 public class Book {
-    public static String id, name,  author, priceBook, publisher, typeBook, publishYear, numPage,ISBN,numPrint,status; 
+     public static String id="", name="", publisher="", writer="", 
+                          type="", price="", writenum="", writeyear="", 
+                          page="", amount="", ISBN="";
 
+    public static String getISBN() {
+        return ISBN;
+    }
+
+    public static void setISBN (String ISBN) {
+        Book.ISBN = ISBN;
+    }
 
     public static String getId() {
         return id;
     }
 
-    public static void setId(String id) {
+    public static void setId (String id) {
         Book.id = id;
     }
 
@@ -25,69 +34,72 @@ public class Book {
         return name;
     }
 
-    public static void setName(String name) {
+    public static void setName (String name) {
         Book.name = name;
-    }
-
- 
-
-    public static String getNameAuthor() {
-        return author;
-    }
-
-    public static void setNameAuthor(String nameAuthor) {
-        Book.author = nameAuthor;
-    }
-
-    public static String getPriceBook() {
-        return priceBook;
-    }
-
-    public static void setPriceBook(String priceBook) {
-        Book.priceBook = priceBook;
     }
 
     public static String getPublisher() {
         return publisher;
     }
 
-    public static void setPublisher(String publisher) {
+    public static void setPublisher (String publisher) {
         Book.publisher = publisher;
     }
 
-    public static String getTypeBook() {
-        return typeBook;
+    public static String getWriter() {
+        return writer;
     }
 
-    public static void setTypeBook(String typeBook) {
-        Book.typeBook = typeBook;
+    public static void setWriter (String writer) {
+        Book.writer = writer;
     }
 
-    public static String getPublishYear() {
-        return publishYear;
+    public static String getType() {
+        return type;
     }
 
-    public static void setPublishYear(String publishYear) {
-        Book.publishYear = publishYear;
+    public static void setType (String type) {
+        Book.type = type;
     }
 
-    public static String getNumpage() {
-        return numPage;
+    public static String getPrice() {
+        return price;
     }
 
-    public static void setNumpage(String Numpage) {
-        Book.numPage = Numpage;
+    public static void setPrice (String price) {
+        Book.price = price;
     }
 
-    public static String getISBN() {
-        return ISBN;
+    public static String getWritenum() {
+        return writenum;
     }
 
-    public static void setISBN(String ISBN) {
-        Book.ISBN = ISBN;
+    public static void setWritenum (String writenum) {
+        Book.writenum = writenum;
     }
 
-   
-    
+    public static String getWriteyear() {
+        return writeyear;
+    }
+
+    public static void setWriteyear (String writeyear) {
+        Book.writeyear = writeyear;
+    }
+
+    public static String getPage() {
+        return page;
+    }
+
+    public static void setPage (String page) {
+        Book.page = page;
+    }
+
+    public static String getAmount() {
+        return amount;
+    }
+
+    public static void setAmount (String amount) {
+        Book.amount = amount;
+    }
     
 }

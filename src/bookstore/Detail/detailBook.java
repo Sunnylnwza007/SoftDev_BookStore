@@ -5,19 +5,25 @@
  */
 package bookstore.Detail;
 
+import bookstore.Book.Book;
+import bookstore.Database.User;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author N A T M A N
  */
-public class detailBook extends javax.swing.JFrame {
+public class DetailBook extends javax.swing.JFrame {
 
     /**
      * Creates new form detailBook
      */
-    public detailBook() {
+    public DetailBook() {
         initComponents();
         this.setSize(1000, 540);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,142 +34,180 @@ public class detailBook extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        addToCart = new javax.swing.JButton();
+        close = new javax.swing.JButton();
+        numberSpinner = new javax.swing.JSpinner();
+        publisherLabel = new javax.swing.JLabel();
+        writerLabel = new javax.swing.JLabel();
+        typeLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
+        statusLabel = new javax.swing.JLabel();
+        orderNumLabel = new javax.swing.JLabel();
+        isbnLabel = new javax.swing.JLabel();
+        numPageLabel = new javax.swing.JLabel();
+        printLabel = new javax.swing.JLabel();
+        publishYearLabel = new javax.swing.JLabel();
+        bookImg = new javax.swing.JLabel();
+        bookNameLabel = new javax.swing.JLabel();
+        publishYearField = new javax.swing.JLabel();
+        publisherField = new javax.swing.JLabel();
+        writerField = new javax.swing.JLabel();
+        typeBookField = new javax.swing.JLabel();
+        priceField = new javax.swing.JLabel();
+        amountField = new javax.swing.JLabel();
+        isbnField = new javax.swing.JLabel();
+        numPageField = new javax.swing.JLabel();
+        writeNumField = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
+        frame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(200, 100));
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jButton1.setText("add to cart");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addToCart.setText("add to cart");
+        addToCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addToCartActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(720, 450, 110, 40);
+        getContentPane().add(addToCart);
+        addToCart.setBounds(770, 480, 110, 40);
 
-        jButton2.setText("close");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(860, 450, 100, 40);
-        getContentPane().add(jSpinner1);
-        jSpinner1.setBounds(510, 360, 60, 30);
+        close.setText("close");
+        close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(close);
+        close.setBounds(890, 480, 100, 40);
 
-        jLabel1.setText("สำนักพิมพ์");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(400, 110, 70, 30);
+        numberSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        getContentPane().add(numberSpinner);
+        numberSpinner.setBounds(850, 400, 80, 30);
 
-        jLabel2.setText("ผู้เขียน");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(400, 170, 36, 16);
+        publisherLabel.setText("Publisher");
+        getContentPane().add(publisherLabel);
+        publisherLabel.setBounds(390, 130, 70, 30);
 
-        jLabel3.setText("ประเภท");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(400, 220, 41, 16);
+        writerLabel.setText("Writer");
+        getContentPane().add(writerLabel);
+        writerLabel.setBounds(390, 180, 70, 30);
 
-        jLabel4.setText("ราคา");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(400, 270, 26, 16);
+        typeLabel.setText("Type");
+        getContentPane().add(typeLabel);
+        typeLabel.setBounds(390, 230, 70, 30);
 
-        jLabel5.setText("สถานะ");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(400, 320, 36, 16);
+        priceLabel.setText("Price");
+        getContentPane().add(priceLabel);
+        priceLabel.setBounds(390, 280, 70, 30);
 
-        jLabel6.setText("จำนวนที่สั่ง");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(400, 370, 70, 20);
+        statusLabel.setText("Status");
+        getContentPane().add(statusLabel);
+        statusLabel.setBounds(390, 330, 70, 30);
 
-        jLabel7.setText("ISBN");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(670, 120, 50, 20);
+        orderNumLabel.setText("Order number");
+        getContentPane().add(orderNumLabel);
+        orderNumLabel.setBounds(750, 400, 90, 30);
 
-        jLabel8.setText("จำนวนหน้า");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(670, 170, 70, 16);
+        isbnLabel.setText("ISBN");
+        getContentPane().add(isbnLabel);
+        isbnLabel.setBounds(640, 130, 120, 30);
 
-        jLabel9.setText("ครั้งที่พิมพ์");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(670, 220, 70, 20);
+        numPageLabel.setText("Number of pages");
+        getContentPane().add(numPageLabel);
+        numPageLabel.setBounds(640, 180, 120, 30);
 
-        jLabel10.setText("ปีที่พิมพ์");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(670, 270, 43, 16);
+        printLabel.setText("Print");
+        getContentPane().add(printLabel);
+        printLabel.setBounds(640, 230, 120, 30);
 
-        jLabel11.setText("image");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(70, 70, 270, 350);
+        publishYearLabel.setText("Published year");
+        getContentPane().add(publishYearLabel);
+        publishYearLabel.setBounds(640, 280, 120, 30);
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel12.setText("bookName");
-        jLabel12.setEnabled(false);
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(500, 30, 90, 30);
+        bookImg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bookImg.setToolTipText("");
+        getContentPane().add(bookImg);
+        bookImg.setBounds(40, 70, 270, 350);
 
-        jLabel13.setText("1");
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(780, 270, 48, 16);
+        bookNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        bookNameLabel.setForeground(new java.awt.Color(51, 51, 51));
+        bookNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bookNameLabel.setText("bookName");
+        bookNameLabel.setEnabled(false);
+        getContentPane().add(bookNameLabel);
+        bookNameLabel.setBounds(0, 40, 1000, 50);
 
-        jLabel14.setText("1");
-        getContentPane().add(jLabel14);
-        jLabel14.setBounds(510, 120, 7, 16);
+        publishYearField.setText("1");
+        getContentPane().add(publishYearField);
+        publishYearField.setBounds(790, 280, 110, 30);
 
-        jLabel15.setText("1");
-        getContentPane().add(jLabel15);
-        jLabel15.setBounds(510, 170, 48, 16);
+        publisherField.setText("1");
+        getContentPane().add(publisherField);
+        publisherField.setBounds(480, 130, 120, 30);
 
-        jLabel16.setText("1");
-        getContentPane().add(jLabel16);
-        jLabel16.setBounds(510, 220, 48, 16);
+        writerField.setText("1");
+        getContentPane().add(writerField);
+        writerField.setBounds(480, 180, 120, 30);
 
-        jLabel17.setText("1");
-        getContentPane().add(jLabel17);
-        jLabel17.setBounds(510, 270, 48, 16);
+        typeBookField.setText("1");
+        getContentPane().add(typeBookField);
+        typeBookField.setBounds(480, 230, 120, 30);
 
-        jLabel18.setText("1");
-        getContentPane().add(jLabel18);
-        jLabel18.setBounds(510, 320, 48, 16);
+        priceField.setText("1");
+        getContentPane().add(priceField);
+        priceField.setBounds(480, 280, 120, 30);
 
-        jLabel19.setText("1");
-        getContentPane().add(jLabel19);
-        jLabel19.setBounds(780, 120, 48, 16);
+        amountField.setText("1");
+        getContentPane().add(amountField);
+        amountField.setBounds(480, 330, 120, 30);
 
-        jLabel20.setText("1");
-        getContentPane().add(jLabel20);
-        jLabel20.setBounds(780, 170, 48, 16);
+        isbnField.setText("1");
+        getContentPane().add(isbnField);
+        isbnField.setBounds(790, 130, 110, 30);
 
-        jLabel21.setText("1");
-        getContentPane().add(jLabel21);
-        jLabel21.setBounds(780, 220, 48, 16);
+        numPageField.setText("1");
+        getContentPane().add(numPageField);
+        numPageField.setBounds(790, 180, 110, 30);
+
+        writeNumField.setText("1");
+        getContentPane().add(writeNumField);
+        writeNumField.setBounds(790, 230, 110, 30);
+
+        background.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1000, 540);
+
+        frame.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(frame);
+        frame.setBounds(350, 100, 580, 290);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void addToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToCartActionPerformed
+        checkLoginIsSuccess();
+    }//GEN-LAST:event_addToCartActionPerformed
+
+    public void checkLoginIsSuccess() {
+        if(DetailBookService.checkLogin()){
+            DetailBookService detail = new DetailBookService();
+            String numOrder = numberSpinner.getValue().toString();
+            detail.addToCart(User.getName() ,Book.getName(), numOrder, Book.getPrice());
+        }
+    }
+
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        closeThisPage();
+    }//GEN-LAST:event_closeActionPerformed
+
+    public void closeThisPage() {
+        this.setVisible(false);
+    }
      
     
     /**
@@ -183,48 +227,81 @@ public class detailBook extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(detailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(detailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(detailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(detailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DetailBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new detailBook().setVisible(true);
+                new DetailBook().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JButton addToCart;
+    private javax.swing.JLabel amountField;
+    private javax.swing.JLabel background;
+    private javax.swing.JLabel bookImg;
+    private javax.swing.JLabel bookNameLabel;
+    private javax.swing.JButton close;
+    private javax.swing.JLabel frame;
+    private javax.swing.JLabel isbnField;
+    private javax.swing.JLabel isbnLabel;
+    private javax.swing.JLabel numPageField;
+    private javax.swing.JLabel numPageLabel;
+    private javax.swing.JSpinner numberSpinner;
+    private javax.swing.JLabel orderNumLabel;
+    private javax.swing.JLabel priceField;
+    private javax.swing.JLabel priceLabel;
+    private javax.swing.JLabel printLabel;
+    private javax.swing.JLabel publishYearField;
+    private javax.swing.JLabel publishYearLabel;
+    private javax.swing.JLabel publisherField;
+    private javax.swing.JLabel publisherLabel;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JLabel typeBookField;
+    private javax.swing.JLabel typeLabel;
+    private javax.swing.JLabel writeNumField;
+    private javax.swing.JLabel writerField;
+    private javax.swing.JLabel writerLabel;
     // End of variables declaration//GEN-END:variables
+
+    
+    public void openProductDetailUi (String idBook) {
+    
+        DetailBookService detailBookService = new DetailBookService();
+        detailBookService.setProductDetail(idBook);
+        
+        ImageIcon icon = new ImageIcon(".\\src\\Pic\\Book\\" + Book.getId() + ".jpg");
+        Image scaleImage = icon.getImage().getScaledInstance(200, 250, Image.SCALE_DEFAULT);
+        bookImg.setIcon(new javax.swing.ImageIcon(scaleImage));
+        
+        bookNameLabel.setText(Book.getName());
+        publisherField.setText(Book.getPublisher());
+        writerField.setText(Book.getWriter());
+        priceField.setText(Book.getPrice());
+        typeBookField.setText(Book.getType());
+        publishYearField.setText(Book.getWriteyear());
+        isbnField.setText(Book.getISBN());
+        writeNumField.setText(Book.getWritenum());
+        numPageField.setText(Book.getPage());
+         
+        if( Integer.parseInt(Book.getAmount()) > 0 ) {
+             amountField.setText("In stock.");
+        }
+        else {
+             amountField.setText("Out of stock.");
+        }
+        
+        this.setVisible(true);
+    }
 }

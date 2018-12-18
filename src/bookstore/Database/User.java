@@ -9,14 +9,26 @@ package bookstore.Database;
  *
  * @author KIATS
  */
+
 public class User {
 
-    public static String username, password, usertype;
+    public static String username="", password="", usertype="s";
+    public static boolean status = false;
 
     public static void setUser(String username, String password, String usertype){
         User.username = username;
         User.password = password;
         User.usertype = usertype;
+    }
+    public static String getName(){
+        return username;
+    }
+    
+    public static Boolean getStatus(){
+        return status;
+    }
+    public static void setStatus(){
+         status = true;
     }
     
 }

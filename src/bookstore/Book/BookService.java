@@ -11,8 +11,8 @@ import java.util.Map;
  * @author Nitipon Chingthong
  */
 public class BookService {
-    public static String getBook(int i){
-        return BookDAO.getBook(i);
+    public static void getBook (int bookId) {
+        BookDAO.getBookById(bookId);
     };
-    
+
 }

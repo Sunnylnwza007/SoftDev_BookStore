@@ -5,18 +5,30 @@
  */
 package bookstore.CartBook;
 
+import bookstore.Database.User;
+import bookstore.Database.User;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author N A T M A N
+ *
  */
 public class CartBook extends javax.swing.JFrame {
+
+    Cart cart;
+    DefaultTableModel tableModel;
+    Address address = new Address();
 
     /**
      * Creates new form CartBook
      */
     public CartBook() {
         initComponents();
-        this.setSize(1000, 540);
+        this.setSize(1000, 500);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -28,97 +40,295 @@ public class CartBook extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        totalPriceLabel = new javax.swing.JLabel();
+        sumField = new javax.swing.JTextField();
+        bahtLabel = new javax.swing.JLabel();
+        close = new javax.swing.JButton();
+        saveAddress = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
+        tableScroll = new javax.swing.JScrollPane();
+        productTable = new javax.swing.JTable();
+        shippingAddressLabel = new javax.swing.JLabel();
+        villageNoLabel = new javax.swing.JLabel();
+        homeNumLabel = new javax.swing.JLabel();
+        subDistLabel = new javax.swing.JLabel();
+        villageNoField = new javax.swing.JTextField();
+        homeNumField = new javax.swing.JTextField();
+        subDistrictField = new javax.swing.JTextField();
+        districtLabel = new javax.swing.JLabel();
+        districtField = new javax.swing.JTextField();
+        provinceLabel = new javax.swing.JLabel();
+        provinceField = new javax.swing.JTextField();
+        postCodeLabel = new javax.swing.JLabel();
+        postcodeField = new javax.swing.JTextField();
+        telLabel = new javax.swing.JLabel();
+        telField = new javax.swing.JTextField();
+        buy = new javax.swing.JButton();
+        shoppingCartHead = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
-        jLabel1.setText("ราคาทั้งหมด");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(710, 400, 80, 20);
+        totalPriceLabel.setText("Total Price");
+        getContentPane().add(totalPriceLabel);
+        totalPriceLabel.setBounds(710, 390, 70, 30);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        sumField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                sumFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(790, 390, 100, 30);
+        getContentPane().add(sumField);
+        sumField.setBounds(780, 390, 100, 30);
 
-        jLabel2.setText("บาท");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(910, 400, 41, 16);
+        bahtLabel.setText("Baht");
+        getContentPane().add(bahtLabel);
+        bahtLabel.setBounds(890, 396, 41, 20);
 
-        jButton1.setText("Close");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        close.setText("Close");
+        close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                closeActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(890, 450, 80, 40);
+        getContentPane().add(close);
+        close.setBounds(890, 450, 80, 40);
 
-        jButton2.setText("Address");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saveAddress.setText("Save Address");
+        saveAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saveAddressActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(620, 450, 80, 40);
+        getContentPane().add(saveAddress);
+        saveAddress.setBounds(490, 450, 160, 40);
 
-        jButton3.setText("Buy");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(710, 450, 80, 40);
+        getContentPane().add(delete);
+        delete.setBounds(800, 450, 80, 40);
 
-        jButton4.setText("Delete");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        productTable.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Book name", "Number of books", "Price"
+            }
+        ));
+        tableScroll.setViewportView(productTable);
+
+        getContentPane().add(tableScroll);
+        tableScroll.setBounds(30, 130, 940, 240);
+
+        shippingAddressLabel.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        shippingAddressLabel.setText("Shipping address");
+        getContentPane().add(shippingAddressLabel);
+        shippingAddressLabel.setBounds(20, 380, 140, 21);
+
+        villageNoLabel.setText("Village No.");
+        getContentPane().add(villageNoLabel);
+        villageNoLabel.setBounds(20, 470, 90, 16);
+
+        homeNumLabel.setText("Home number");
+        getContentPane().add(homeNumLabel);
+        homeNumLabel.setBounds(20, 410, 90, 16);
+
+        subDistLabel.setText("Sub-district");
+        getContentPane().add(subDistLabel);
+        subDistLabel.setBounds(20, 440, 90, 16);
+
+        villageNoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                villageNoFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(800, 450, 80, 40);
+        getContentPane().add(villageNoField);
+        villageNoField.setBounds(110, 470, 120, 24);
+        getContentPane().add(homeNumField);
+        homeNumField.setBounds(110, 410, 120, 24);
+        getContentPane().add(subDistrictField);
+        subDistrictField.setBounds(110, 440, 120, 24);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/ตะกร้า.png"))); // NOI18N
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 1000, 110);
+        districtLabel.setText("District");
+        getContentPane().add(districtLabel);
+        districtLabel.setBounds(250, 410, 80, 20);
+        getContentPane().add(districtField);
+        districtField.setBounds(330, 410, 120, 24);
+
+        provinceLabel.setText("Province");
+        getContentPane().add(provinceLabel);
+        provinceLabel.setBounds(250, 440, 80, 20);
+        getContentPane().add(provinceField);
+        provinceField.setBounds(330, 440, 120, 24);
+
+        postCodeLabel.setText("Post Code");
+        getContentPane().add(postCodeLabel);
+        postCodeLabel.setBounds(250, 470, 80, 20);
+        getContentPane().add(postcodeField);
+        postcodeField.setBounds(330, 470, 120, 24);
+
+        telLabel.setText("Tel");
+        getContentPane().add(telLabel);
+        telLabel.setBounds(470, 406, 40, 30);
+        getContentPane().add(telField);
+        telField.setBounds(510, 410, 120, 24);
+
+        buy.setText("Buy");
+        buy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buy);
+        buy.setBounds(710, 450, 80, 40);
+
+        shoppingCartHead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pic/cartHead.PNG"))); // NOI18N
+        getContentPane().add(shoppingCartHead);
+        shoppingCartHead.setBounds(0, 0, 1000, 100);
+
+        background.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 1000, 500);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void sumFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sumFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_sumFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
+        closeThisPage();
+    }//GEN-LAST:event_closeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    public void closeThisPage() {
+        this.dispose();
+    }
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void buyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyActionPerformed
+        int total = setSum();
+        checkAddressIsEmpty(total);
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_buyActionPerformed
+
+    public void checkAddressIsEmpty(int total) throws HeadlessException {
+        if (checkAddress()) {
+            showMessagePleaseInputAddress();
+        } else {
+            showBillUi(total);
+            this.setVisible(false);
+        }
+    }
+
+    public void showBillUi(int total) {
+        new bookstore.Bill.Bill(cart.bookName, cart.num, cart.price, total).setVisible(true);
+    }
+
+    public void showMessagePleaseInputAddress() throws HeadlessException {
+        JOptionPane.showMessageDialog(null, "Please input address");
+    }
+
+
+    private void villageNoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_villageNoFieldActionPerformed
+
+    }//GEN-LAST:event_villageNoFieldActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        showCartUi();
+    }//GEN-LAST:event_formWindowOpened
+
+    void showCartUi() {
+        CartService cartService = new CartService();
+
+        cart = cartService.searchCart(User.getName());
+        setSumAndTable();
+        setAddress();
+    }
+
+    public void setSumAndTable() {
+        if (cart.numberOfProductInCart() > 0) {
+            setTable();
+            setSum();
+        }
+    }
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        String bookName = selectedBookNameToDelete();
+        String num = selectedNumToDelete();
+        String price = selectedPriceToDelete();
+        CartService cartService = new CartService();
+        cartService.deleteBook(bookName, num, price);
+        cart.deleteListCart(productTable.getSelectedRow());
+        setNewValue();
+    }//GEN-LAST:event_deleteActionPerformed
+
+    public String selectedPriceToDelete() {
+        String price = productTable.getValueAt(productTable.getSelectedRow(), 2).toString();
+        return price;
+    }
+
+    public String selectedNumToDelete() {
+        String num = productTable.getValueAt(productTable.getSelectedRow(), 1).toString();
+        return num;
+    }
+
+    public String selectedBookNameToDelete() {
+        String bookName = productTable.getValueAt(productTable.getSelectedRow(), 0).toString();
+        return bookName;
+    }
+
+    public void setNewValue() throws HeadlessException {
+        if (cart.numberOfProductInCart() != 0) {
+            setTable();
+            setSum();
+            showMessageDeleteIsSuccess();
+        } else {
+            String[] tblHead = {"Book name", "Number of book", "Price"};
+            tableModel = new DefaultTableModel(tblHead, 0);
+            productTable.setModel(tableModel);
+        }
+    }
+
+    public void showMessageDeleteIsSuccess() throws HeadlessException {
+        JOptionPane.showMessageDialog(null, "Delete data successfully");
+    }
+
+    private void saveAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAddressActionPerformed
+
+        getAddress();
+        CartService CartService = new CartService();
+        CartService.addAddress(address, User.getName());
+        showMessageSaveComplete();
+
+    }//GEN-LAST:event_saveAddressActionPerformed
+
+    public void showMessageSaveComplete() throws HeadlessException {
+        JOptionPane.showMessageDialog(null, "Save address completed");
+    }
+
+    public void getAddress() {
+        address.setHouseNum(homeNumField.getText());
+        address.setVillageNo(villageNoField.getText());
+        address.setSubDistrict(subDistrictField.getText());
+        address.setDistrict(districtField.getText());
+        address.setProvince(provinceField.getText());
+        address.setPostcode(postcodeField.getText());
+        address.setTel(telField.getText());
+    }
 
     /**
      * @param args the command line arguments
@@ -155,14 +365,90 @@ public class CartBook extends javax.swing.JFrame {
         });
     }
 
+    public void setTable() {
+
+        String[] tblHead = {"Book name", "Number of book", "Price"};
+        tableModel = new DefaultTableModel(tblHead, 0);
+        try {
+            for (int i = 0; i < cart.numberOfProductInCart(); i++) {
+                String[] item = {cart.getBookName(i), cart.getNum(i), cart.getPrice(i)};
+                tableModel.addRow(item);
+            }
+
+            productTable.setModel(tableModel);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public int setSum() {
+        int sumPrice = 0;
+
+        try {
+            for (int count = 0; count < tableModel.getRowCount(); count++) {
+                int num = Integer.parseInt(tableModel.getValueAt(count, 1).toString());
+                int price = Integer.parseInt(tableModel.getValueAt(count, 2).toString());
+                sumPrice += num * price;
+            }
+            sumField.setText(String.valueOf(sumPrice));
+
+            return sumPrice;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public void setAddress() {
+        CartService cartService = new CartService();
+        address = cartService.setAddress(User.getName());
+        homeNumField.setText(address.getHouseNum());
+        villageNoField.setText(address.getVillageNo());
+        subDistrictField.setText(address.getSubDistrict());
+        districtField.setText(address.getDistrict());
+        provinceField.setText(address.getProvince());
+        postcodeField.setText(address.getPostcode());
+        telField.setText(address.getTel());
+
+    }
+
+    public boolean checkAddress() {
+        if (homeNumField.getText().equals("") || villageNoField.getText().equals("")
+                || subDistrictField.getText().equals("") || districtField.getText().equals("")
+                || provinceField.getText().equals("") || postcodeField.getText().equals("")
+                || telField.getText().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel background;
+    private javax.swing.JLabel bahtLabel;
+    private javax.swing.JButton buy;
+    private javax.swing.JButton close;
+    private javax.swing.JButton delete;
+    private javax.swing.JTextField districtField;
+    private javax.swing.JLabel districtLabel;
+    private javax.swing.JTextField homeNumField;
+    private javax.swing.JLabel homeNumLabel;
+    private javax.swing.JLabel postCodeLabel;
+    private javax.swing.JTextField postcodeField;
+    private javax.swing.JTable productTable;
+    private javax.swing.JTextField provinceField;
+    private javax.swing.JLabel provinceLabel;
+    private javax.swing.JButton saveAddress;
+    private javax.swing.JLabel shippingAddressLabel;
+    private javax.swing.JLabel shoppingCartHead;
+    private javax.swing.JLabel subDistLabel;
+    private javax.swing.JTextField subDistrictField;
+    private javax.swing.JTextField sumField;
+    private javax.swing.JScrollPane tableScroll;
+    private javax.swing.JTextField telField;
+    private javax.swing.JLabel telLabel;
+    private javax.swing.JLabel totalPriceLabel;
+    private javax.swing.JTextField villageNoField;
+    private javax.swing.JLabel villageNoLabel;
     // End of variables declaration//GEN-END:variables
 }
